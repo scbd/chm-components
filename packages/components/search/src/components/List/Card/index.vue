@@ -1,4 +1,3 @@
-
 <template>
   <div class="card card-row mb-5">
     <div class="card-header">
@@ -7,7 +6,7 @@
           <span class="text-muted">{{$t(schema)}}</span>
         </div>
       </div>
-  
+
     </div>
 
     <!-- TAB 1 -->
@@ -26,22 +25,22 @@
 </template>
 
 <script>
-import { lookUp   } from '@action-agenda/cached-apis/dist/legacy/cjs/index.common'
+import { lookUp   } from '../../../api/cached-apis/index';
 
-import   HorzCardAction   from './CardBody.vue'
-import   i18n              from '../../../locales/index.js'
+import   HorzCardAction   from './CardBody.vue';
+import   i18n              from '../../../locales/index';
 
 export default {
   name      : 'SearchListCard',
-  components: { HorzCardAction},
+  components: { HorzCardAction },
   props     : {
-    id          : { type: String, required: true  },
-    name        : { type: String, required: true  },
-    description : { type: String, required: false },
-    dateTime  : { type: String, required: false },
-    schema:{ type: String, required: false },
+    id         : { type: String, required: true  },
+    name       : { type: String, required: true  },
+    description: { type: String, required: false },
+    dateTime   : { type: String, required: false },
+    schema     : { type: String, required: false },
     url        : { type: String, required: true  },
-    options     : { type: Object, required: true  }
+    options    : { type: Object, required: true  },
   },
   computed: { status },
   methods : {  loadIcons },
@@ -49,63 +48,59 @@ export default {
   data,
   created,
   updated,
-  i18n
+  i18n,
+};
+
+function  data() { return { icons: [] }; }
+
+async function updated() { await this.loadIcons(); }
+
+async function created() {
+  await this.loadIcons();
 }
 
-function  data(){ return { icons: [] } }
-
-async function updated(){ await this.loadIcons() }
-
-async function created(){
-  await this.loadIcons()
-}
-
-function status(){ return this.meta.status }
-
-
+function status() { return this.meta.status; }
 
 // function stripTrailingSlash (str){
 //   return str.endsWith('/') ?
 //     str.slice(0, -1) :
 //     str;
 // }
-// function getStatusUrl (id, status){ return `${this.options.api}/v2019/actions/${id}/status/${status}` }
+// function getStatusUrl (id, status){
+// return `${this.options.api}/v2019/actions/${id}/status/${status}` }
 
-function dateFormat (date){
-  const d = new Date(date)
+function dateFormat(date) {
+  const d = new Date(date);
 
-  return `${d.getUTCFullYear()}-${monthFormat(d.getUTCMonth())}-${dayFormat(d.getUTCDate())}  `
+  return `${d.getUTCFullYear()}-${monthFormat(d.getUTCMonth())}-${dayFormat(d.getUTCDate())}  `;
 }
 
-function monthFormat (month){
-  if(month < 10)
-    return `0${month+1}`
-  return month+1
+function monthFormat(month) {
+  if (month < 10) { return `0${month + 1}`; }
+  return month + 1;
 }
-function dayFormat (day){
-  if(day < 10)
-    return `0${day}`
-  return day
+function dayFormat(day) {
+  if (day < 10) { return `0${day}`; }
+  return day;
 }
 
+async function loadIcons() {
+  const iconData = [ ...(this.actionDetails || {}).actionCategories || [] ];
 
-
-async function loadIcons(){
-  const iconData = [ ...(this.actionDetails||{}).actionCategories || [] ]
-
-  if(!iconData.length) return
-
-  for (const [ index, { identifier }={} ] of iconData.entries()){
-    if(!identifier) continue
-    iconData[index] = await lookUp('all', identifier, true)
-    if(!iconData[index]){
-      console.error('id', this._id)
-      console.error('iconData', iconData)
-      console.log('this.actionDetails', this.actionDetails)
-      throw new Error('identifier not found')
+  if (!iconData.length) return;
+  // eslint-disable-next-line no-restricted-syntax
+  for (const [ index,
+    { identifier }  = {} ] of iconData.entries()) {
+    if (identifier) {
+      iconData[index] = lookUp('all', identifier, true);
+      if (!iconData[index]) {
+        console.error('id', this._id);
+        console.error('iconData', iconData);
+        throw new Error('identifier not found');
+      }
     }
   }
-  this.icons = iconData
+  this.icons = iconData;
 }
 </script>
 

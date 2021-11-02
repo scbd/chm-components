@@ -1,4 +1,3 @@
-
 <template>
 <div class="loading">
   <div class="cont mx-auto">
@@ -15,13 +14,13 @@
 </template>
 
 <script>
-import Spinner from './Spinner.vue'
+import Spinner from './Spinner.vue';
 
 export default {
   name      : 'Loading',
   components: { Spinner },
-  props     : [ 'percent' ]
-}
+  props     : [ 'percent' ],
+};
 </script>
 
 <style scoped>

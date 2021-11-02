@@ -6,9 +6,6 @@ src/plugin.template.js
 .DS_Store
 node_modules
 /dist
-cypress.env.json
-/tests/e2e/videos/
-/tests/e2e/screenshots/
 
 # local env files
 .env.local

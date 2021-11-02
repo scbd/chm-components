@@ -26,7 +26,10 @@
               <slot name="tag" :option="option" :search="search" :remove="removeElement">
                 <span class="multiselect__tag" :key="index">
                   <span v-text="getOptionLabel(option)"></span>
-                  <i aria-hidden="true" tabindex="1" @keypress.enter.prevent="removeElement(option)"  @mousedown.prevent="removeElement(option)" class="multiselect__tag-icon"></i>
+                  <i aria-hidden="true" tabindex="1"
+                  @keypress.enter.prevent="removeElement(option)"
+                  @mousedown.prevent="removeElement(option)" class="multiselect__tag-icon">
+                  </i>
                 </span>
               </slot>
             </template>
@@ -147,8 +150,8 @@
 </template>
 
 <script>
-import multiselectMixin from './multiselectMixin'
-import pointerMixin from './pointerMixin'
+import multiselectMixin from './multiselectMixin';
+import pointerMixin from './pointerMixin';
 
 export default {
   name  : 'vue-multiselect',
@@ -161,7 +164,7 @@ export default {
      */
     name: {
       type   : String,
-      default: ''
+      default: '',
     },
     /**
      * String to show when pointing to an option
@@ -170,7 +173,7 @@ export default {
      */
     selectLabel: {
       type   : String,
-      default: 'Press enter to select'
+      default: 'Press enter to select',
     },
     /**
      * String to show when pointing to an option
@@ -179,7 +182,7 @@ export default {
      */
     selectGroupLabel: {
       type   : String,
-      default: 'Press enter to select group'
+      default: 'Press enter to select group',
     },
     /**
      * String to show next to selected option
@@ -188,7 +191,7 @@ export default {
      */
     selectedLabel: {
       type   : String,
-      default: 'Selected'
+      default: 'Selected',
     },
     /**
      * String to show when pointing to an already selected option
@@ -197,7 +200,7 @@ export default {
      */
     deselectLabel: {
       type   : String,
-      default: 'Press enter to remove'
+      default: 'Press enter to remove',
     },
     /**
      * String to show when pointing to an already selected option
@@ -206,7 +209,7 @@ export default {
      */
     deselectGroupLabel: {
       type   : String,
-      default: 'Press enter to deselect group'
+      default: 'Press enter to deselect group',
     },
     /**
      * Decide whether to show pointer labels
@@ -215,7 +218,7 @@ export default {
      */
     showLabels: {
       type   : Boolean,
-      default: true
+      default: true,
     },
     /**
      * Limit the display of selected options. The rest will be hidden within the limitText string.
@@ -224,7 +227,7 @@ export default {
      */
     limit: {
       type   : Number,
-      default: 99999
+      default: 99999,
     },
     /**
      * Sets maxHeight style value of the dropdown
@@ -233,7 +236,7 @@ export default {
      */
     maxHeight: {
       type   : Number,
-      default: 300
+      default: 300,
     },
     /**
      * Function that process the message shown when selected
@@ -244,7 +247,7 @@ export default {
      */
     limitText: {
       type   : Function,
-      default: count => `and ${count} more`
+      default: (count) => `and ${count} more`,
     },
     /**
      * Set true to trigger the loading spinner.
@@ -253,7 +256,7 @@ export default {
      */
     loading: {
       type   : Boolean,
-      default: false
+      default: false,
     },
     /**
      * Disables the multiselect if true.
@@ -262,7 +265,7 @@ export default {
      */
     disabled: {
       type   : Boolean,
-      default: false
+      default: false,
     },
     /**
      * Fixed opening direction
@@ -271,7 +274,7 @@ export default {
      */
     openDirection: {
       type   : String,
-      default: ''
+      default: '',
     },
     /**
      * Shows slot with message about empty options
@@ -280,89 +283,86 @@ export default {
      */
     showNoOptions: {
       type   : Boolean,
-      default: true
+      default: true,
     },
     showNoResults: {
       type   : Boolean,
-      default: true
+      default: true,
     },
     tabindex: {
       type   : Number,
-      default: 0
-    }
+      default: 0,
+    },
   },
   computed: {
-    isSingleLabelVisible (){
+    isSingleLabelVisible() {
       return (
-        (this.singleValue || this.singleValue === 0) &&
-        (!this.isOpen || !this.searchable) &&
-        !this.visibleValues.length
-      )
+        (this.singleValue || this.singleValue === 0)
+        && (!this.isOpen || !this.searchable)
+        && !this.visibleValues.length
+      );
     },
-    isPlaceholderVisible (){
-      return !this.internalValue.length && (!this.searchable || !this.isOpen)
+    isPlaceholderVisible() {
+      return !this.internalValue.length && (!this.searchable || !this.isOpen);
     },
-    visibleValues (){
-      return this.multiple ? this.internalValue.slice(0, this.limit) : []
+    visibleValues() {
+      return this.multiple ? this.internalValue.slice(0, this.limit) : [];
     },
-    singleValue (){
-      return this.internalValue[0]
+    singleValue() {
+      return this.internalValue[0];
     },
-    deselectLabelText (){
-      return this.showLabels ? this.deselectLabel : ''
+    deselectLabelText() {
+      return this.showLabels ? this.deselectLabel : '';
     },
-    deselectGroupLabelText (){
-      return this.showLabels ? this.deselectGroupLabel : ''
+    deselectGroupLabelText() {
+      return this.showLabels ? this.deselectGroupLabel : '';
     },
-    selectLabelText (){
-      return this.showLabels ? this.selectLabel : ''
+    selectLabelText() {
+      return this.showLabels ? this.selectLabel : '';
     },
-    selectGroupLabelText (){
-      return this.showLabels ? this.selectGroupLabel : ''
+    selectGroupLabelText() {
+      return this.showLabels ? this.selectGroupLabel : '';
     },
-    selectedLabelText (){
-      return this.showLabels ? this.selectedLabel : ''
+    selectedLabelText() {
+      return this.showLabels ? this.selectedLabel : '';
     },
-    inputStyle (){
+    inputStyle() {
       if (
-        this.searchable ||
-        (this.multiple && this.value && this.value.length)
-      )
-        // Hide input by setting the width to 0 allowing it to receive focus
+        this.searchable
+        || (this.multiple && this.value && this.value.length)
+      )  {
         return this.isOpen
           ? { width: '100%' }
-          : { width: '0', position: 'absolute', padding: '0' }
-          return { width: '100%' }
+          : { width: '0', position: 'absolute', padding: '0' };
+      }
+      return { width: '100%' };
     },
-    contentStyle (){
+    contentStyle() {
       return this.options.length
         ? { display: 'inline-block' }
-        : { display: 'block' }
+        : { display: 'block' };
     },
-    isAbove (){
-      if (this.openDirection === 'above' || this.openDirection === 'top')
-        return true
-      
-      else if (
-        this.openDirection === 'below' ||
-        this.openDirection === 'bottom'
-      )
-        return false
-      
-      else
-        return this.preferredOpenDirection === 'above'
+    isAbove() {
+      if (this.openDirection === 'above' || this.openDirection === 'top') { return true; }
+
+      if (
+        this.openDirection === 'below'
+        || this.openDirection === 'bottom'
+      ) { return false; }
+
+      return this.preferredOpenDirection === 'above';
     },
-    showSearchInput (){
+    showSearchInput() {
       return (
-        this.searchable &&
-        (this.hasSingleSelectedSlot &&
-        (this.visibleSingleValue || this.visibleSingleValue === 0)
+        this.searchable
+        && (this.hasSingleSelectedSlot
+        && (this.visibleSingleValue || this.visibleSingleValue === 0)
           ? this.isOpen
           : true)
-      )
-    }
-  }
-}
+      );
+    },
+  },
+};
 </script>
 
 <style scoped>

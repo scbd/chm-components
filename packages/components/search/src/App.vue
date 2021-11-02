@@ -10,176 +10,186 @@
 
 <script>
 
-import i18n from './locales/index.js'
+import i18n from './locales/index';
 
-// import { getList, resetCache, initializeApi, updateOptions } from '~/components/api/index.js'
-import { getList, initializeApi, updateOptions } from '../../api/index'
+import { getList, initializeApi, updateOptions } from './api/index';
 
-import List              from './components/List/index.vue'
-import getDefaultOptions from './default-options'
-import FilterNav         from './components/FilterNav.vue'
-import Feedback          from './components/Feedback.vue'
+import List              from './components/List/index.vue';
+import getDefaultOptions from './default-options';
+import FilterNav         from './components/FilterNav.vue';
+import Feedback          from './components/Feedback.vue';
 
 export default {
   name      : 'PortalAppSearch',
   components: {  FilterNav, Feedback, List },
   props     : {
     options : { type: Object, required: false },
-    forceEnv: { type: String, required: false, default: 'production' }
+    forceEnv: { type: String, required: false, default: 'production' },
   },
-  methods : { onScbdFilterChange, setRowsAndTotal, onScroll, onNextPageLoaded, preLoadFilter },
+  methods: {
+    onScbdFilterChange, setRowsAndTotal, onScroll, onNextPageLoaded, preLoadFilter,
+  },
   computed: { opts, totalPages, top },
   created,
   data,
   errorCaptured,
-  i18n, mounted,
-  watch   : { '$route.query.filter'(){ this.onScbdFilterChange() } }
+  i18n,
+  mounted,
+  watch   : {
+    // eslint-disable-next-line func-names
+    '$route.query.filter': function () { this.onScbdFilterChange(); },
+  },
+};
+
+async function created() {
+  const { $router, $store, $refs } = this;
+
+  const $el = $refs.navFilter;
+
+  initializeApi({ ...this.opts }, { $store, $router, $el });
+
+  await this.setRowsAndTotal();
 }
 
-
-async function created(){
-  const { $router, $store, $refs } = this
-
-  const $el = $refs.navFilter
-
-  initializeApi({ ...this.opts }, { $store, $router, $el })
-
-  await this.setRowsAndTotal()
+function mounted() {
+  if (this.opts.preLoadFilter) this.preLoadFilter(this.opts.preLoadFilter);
 }
 
-function mounted(){
-  if(this.opts.preLoadFilter) this.preLoadFilter(this.opts.preLoadFilter)
+function data() {
+  return {
+    rows: [], total: 0, page: 1, loading: false, notResized: true,
+  };
+}
+function opts() {  return { ...getDefaultOptions({}, this.forceEnv),  ...this.options  }; }
+
+function onScroll($el) {
+  const self = this;
+
+  updateOptions({ $el });
+  return async () => {
+    if (process.server) return;
+
+    const { pageYOffset }                                          = window;
+    const { scrollHeight, scrollTop:scrollTopDocEl, offsetHeight } = window.document.documentElement;
+    const { scrollTop:scrollTopBody                              } = window.document.body;
+    const   scrollTop                                              = scrollTopBody || scrollTopDocEl;
+
+    const   currentScrollPosition  = Math.abs(offsetHeight + (pageYOffset || scrollTop));
+    const   isLessThanHalfScrolled = currentScrollPosition <= (scrollHeight / 2);
+    const   isListComplete         = (self.page === self.totalPages);
+
+    if (isListComplete || isLessThanHalfScrolled || self.loading) return;  // do nothing
+
+    self.loading = true;
+    window.addEventListener('$nextPageLoaded', self.onNextPageLoaded);
+
+    const nextPageRows = await getList(true);
+
+    self.rows.push(...nextPageRows.rows);
+  };
 }
 
-function data (){ return { rows: [], total: 0, page: 1, loading: false, notResized: true } }
-function opts (){  return { ...getDefaultOptions({}, this.forceEnv),  ...this.options  } }
+function onNextPageLoaded($event) {
+  if (!this.server) {
+    const { $page: { start } } = $event;
 
-function onScroll($el){
-  const self = this
-
-  updateOptions({ $el })
-  return async() => {
-    if(process.server) return
-    
-    const { pageYOffset } = window
-    const { scrollHeight, scrollTop:scrollTopDocEl, offsetHeight } = window.document.documentElement
-    const { scrollTop:scrollTopBody                              } = window.document.body
-    const   scrollTop                                              = scrollTopBody || scrollTopDocEl
-
-    const   currentScrollPosition                   = Math.abs(offsetHeight + (pageYOffset || scrollTop))
-    const   isLessThanHalfScrolled                  = currentScrollPosition <= (scrollHeight / 2)
-    const   isListComplete                          = (self.page === self.totalPages)
-
-    if(isListComplete || isLessThanHalfScrolled || self.loading) return  //do nothing
-
-    self.loading = true
-    window.addEventListener('$nextPageLoaded', self.onNextPageLoaded)
-    
-    const nextPageRows = await getList(true)
-
-    self.rows.push(...nextPageRows.rows)
+    this.page = (start / 10) + 1;
+    window.removeEventListener('$nextPageLoaded', this.onNextPageLoaded);
+    setTimeout(() => { this.loading = false; }, 100);
   }
 }
 
-function onNextPageLoaded($event){
-  if(this.server) return
-  const { $page: { start } } = $event
-
-  this.page = (start / 10) +1
-  window.removeEventListener('$nextPageLoaded', this.onNextPageLoaded)
-  setTimeout(() => this.loading = false, 100)
+function totalPages() {
+  return Math.ceil(this.total / 10);
 }
 
-function totalPages(){
-  return Math.ceil(this.total/10)
+async function onScbdFilterChange() {
+  this.page  = 1;
+  this.total = 0;
+
+  await this.setRowsAndTotal();
 }
 
-async function onScbdFilterChange(){
-  this.page    = 1
-  this.total   = 0
+async function setRowsAndTotal() {
+  this.loading = true;
 
-  await this.setRowsAndTotal()
+  const { total, rows } = await getList();
+
+  this.total   = total;
+  this.rows    = rows;
+  this.loading = false;
 }
 
-async function setRowsAndTotal(){
-  this.loading = true
+function preLoadFilter(newQuery) {
+  if (!newQuery) return;
 
-  const { total, rows } = await getList()
+  const query = this.$route.params.query ? mergeDeep(this.$route.params.query, newQuery) : newQuery;
 
-  this.total   = total
-  this.rows    = rows
-  this.loading = false
+  this.$router.push({ query }, () => this.onScbdFilterChange());
 }
 
-function preLoadFilter(newQuery){
-  if(!newQuery) return
+function top() {
+  const size = getSize();
 
-  const query = this.$route.params.query ? mergeDeep(this.$route.params.query, newQuery) : newQuery
-
-  this.$router.push({ query }, () => this.onScbdFilterChange())
+  return this.opts[`${size}Top`] || 0;
 }
 
-function top(){
-  const size = getSize()
+function getSize() {
+  const viewPort = getWidth();
 
-  return this.opts[`${size}Top`] || 0
+  if (viewPort <= 480) return 'sm';
+  if (viewPort > 480 && viewPort <= 768) return 'md';
+  if (viewPort > 768) return 'lg';
+  return 'sm';
 }
 
-function getSize(){
-  const viewPort = getWidth()
+function getWidth() {
+  if (typeof window === 'undefined') return 0;
 
-  if(viewPort <= 480) return 'sm'
-  if(viewPort > 480 && viewPort <= 768) return 'md'
-  if(viewPort > 768) return 'lg'
+  return Math.max(window.document.documentElement.clientWidth || 0, window.innerWidth || 0);
+}
+function errorCaptured(err) {
+  console.error('Search error:', err);
+  console.error(err);
 }
 
-function getWidth(){
-  if(typeof window === 'undefined') return 0
-
-  return Math.max(window.document.documentElement.clientWidth || 0, window.innerWidth || 0)
-}
-function errorCaptured(err){
-  console.error('Search error:', err)
-  console.error(err)
-}
-
-function mergeDeep (target, source, isMergingArrays = false){
+function mergeDeep(target, source, isMergingArrays = false) {
+  // eslint-disable-next-line no-param-reassign
   target = ((obj) => {
     let cloneObj;
 
     try {
       cloneObj = JSON.parse(JSON.stringify(obj));
-    }
-    catch(err){
-      cloneObj = Object.assign({}, obj);
+    } catch (err) {
+      cloneObj = { ...obj };
     }
     return cloneObj;
   })(target);
 
   const isObject = (obj) => obj && typeof obj === 'object';
 
-  if (!isObject(target) || !isObject(source))
-    return source;
+  if (!isObject(target) || !isObject(source)) return source;
 
-  Object.keys(source).forEach(key => {
+  Object.keys(source).forEach((key) => {
     const targetValue = target[key];
     const sourceValue = source[key];
 
-    if (Array.isArray(targetValue) && Array.isArray(sourceValue))
-      if (isMergingArrays){
-        target[key] = targetValue.map((x, i) => sourceValue.length <= i
+    if (Array.isArray(targetValue) && Array.isArray(sourceValue)) {
+      if (isMergingArrays) {
+        // eslint-disable-next-line no-param-reassign
+        target[key] = targetValue.map((x, i) => (sourceValue.length <= i
           ? x
-          : mergeDeep(x, sourceValue[i], isMergingArrays));
-        if (sourceValue.length > targetValue.length)
-          target[key] = target[key].concat(sourceValue.slice(targetValue.length));
+          : mergeDeep(x, sourceValue[i], isMergingArrays)));
+        // eslint-disable-next-line no-param-reassign
+        if (sourceValue.length > targetValue.length) {
+          target[key] = target[key].concat(sourceValue.slice(targetValue.length)); // eslint-disable-line no-param-reassign
+        }
+      } else {
+        target[key] = targetValue.concat(sourceValue); // eslint-disable-line no-param-reassign
       }
-      else {
-        target[key] = targetValue.concat(sourceValue);
-      }
-    else if (isObject(targetValue) && isObject(sourceValue))
-      target[key] = mergeDeep(Object.assign({}, targetValue), sourceValue, isMergingArrays);
-    else
-      target[key] = sourceValue;
+    } else if (isObject(targetValue) && isObject(sourceValue)) {
+      target[key] = mergeDeep({ ...targetValue }, sourceValue, isMergingArrays); // eslint-disable-line no-param-reassign
+    } else { target[key] = sourceValue; }// eslint-disable-line no-param-reassign
   });
 
   return target;

@@ -1,92 +1,92 @@
-
+// eslint-disable-next-line import/prefer-default-export
 export const schemas = new Set([
   {
     identifier: 'resource',
     name      : {
-      en: 'Resource'
-    }
+      en: 'Resource',
+    },
   },
   {
     identifier: 'recommendation',
     name      : {
-      en: 'Recommendation'
-    }
+      en: 'Recommendation',
+    },
   },
   {
     identifier: 'decision',
     name      : {
-      en: 'Decision'
-    }
+      en: 'Decision',
+    },
   },
   {
     identifier: 'capacityBuildingInitiative',
     name      : {
-      en: 'Initiative'
-    }
+      en: 'Initiative',
+    },
   },
   {
     identifier: 'bbiOpportunity',
     name      : {
-      en: 'Opportunity'
-    }
+      en: 'Opportunity',
+    },
   },
   {
     identifier: 'bbiRequest',
     name      : {
-      en: 'Request for Assistance'
-    }
+      en: 'Request for Assistance',
+    },
   },
   {
     identifier: 'bbiProfile',
     name      : {
-      en: 'Opportunity Provider Profile'
-    }
+      en: 'Opportunity Provider Profile',
+    },
   },
   {
     identifier: 'meetingDocument',
     name      : {
-      en: 'Meeting Document'
-    }
+      en: 'Meeting Document',
+    },
   },
   {
     identifier: 'pressRelease',
     name      : {
-      en: 'Press Release'
-    }
+      en: 'Press Release',
+    },
   },
   {
     identifier: 'news',
     name      : {
-      en: 'News'
-    }
+      en: 'News',
+    },
   },
   {
     identifier: 'new',
     name      : {
-      en: 'New'
-    }
+      en: 'New',
+    },
   },
   {
     identifier: 'statement',
     name      : {
-      en: 'Statement'
-    }
+      en: 'Statement',
+    },
   },
   {
     identifier: 'meeting',
     name      : {
-      en: 'Meeting'
-    }
+      en: 'Meeting',
+    },
   },
   {
     identifier: 'notification',
     name      : {
-      en: 'SCBD Official Notification'
-    }
-  }
-].sort(compare))
+      en: 'SCBD Official Notification',
+    },
+  },
+].sort(compare));
 
-function compare(a, b){
+function compare(a, b) {
   if (a.name.en > b.name.en) return 1;
   if (b.name.en > a.name.en) return -1;
 

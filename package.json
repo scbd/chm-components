@@ -9,13 +9,7 @@
   "homepage": "https://github.com/scbd/chm-components",
   "workspaces": {
     "packages": [
-      "packages/components/*"
-    ],
-    "nohoist": [
-      "**/@houlagins/dist-builder",
-      "@houlagins/schema-dot-organizer",
-      "**/fmin",
-      "**/@amcharts/amcharts4"
+      "packages/*"
     ]
   },
   "repository": "git+https://github.com/scbd/chm-components.git",

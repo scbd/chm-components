@@ -26,7 +26,10 @@
 
     <template  slot="beforeList"  >
       <div v-if="latestSearchText">
-        <button class="btn btn-outline-info my-3 mx-3" type="button" v-on:click="addTextSearch(latestSearchText); $refs.multiSelect.deactivate()" >{{$t('Text Search')}}</button>
+        <button class="btn btn-outline-info my-3 mx-3"
+          type="button" v-on:click="addTextSearch(latestSearchText);
+         $refs.multiSelect.deactivate()" >{{$t('Text Search')}}
+         </button>
       </div>
     </template>
 
@@ -58,9 +61,8 @@
 </template>
 
 <script>
-import Multiselect from './multi-select/index.js'
+import Multiselect from './multi-select/index';
 // import Icon        from '~/components/Icons/Icon'
-
 
 export default {
   name      : 'SCBDSelect',
@@ -73,44 +75,44 @@ export default {
     options      : { type: Array, required: true },
     addTextSearch: { type: Function, required: true },
     onChange     : { type: Function, required: true },
-    countsMap    : { type: Object  }
+    countsMap    : { type: Object  },
   },
   methods : { update, highLight, onClose },
   computed: { counts },
-  data
-}
+  data,
+};
 
-function counts (){
+function counts() {
   return ({ identifier }) => {
-    if(!this.countsMap) return 'ZERO'
-    return this.countsMap[identifier]
-  }
+    if (!this.countsMap) return 'ZERO';
+    return this.countsMap[identifier];
+  };
 }
 
-function   data(){
+function   data() {
   return {
     values          : this.value,
     isLoading       : false,
-    latestSearchText: ''
-  }
+    latestSearchText: '',
+  };
 }
 
-function update(){
-  this.$emit('input', this.values)
+function update() {
+  this.$emit('input', this.values);
 }
 
-function onClose(){
-  this.latestSearchText =''
+function onClose() {
+  this.latestSearchText = '';
 }
 
-function highLight({ search, option }){
-  if(search) this.latestSearchText = search  // catch current search value
+function highLight({ search, option }) {
+  if (search) this.latestSearchText = search;  // catch current search value
 
-  if(!search || !option.name) return option.name
+  if (!search || !option.name) return option.name;
 
-  const regEx = new RegExp(search, 'ig')
+  const regEx = new RegExp(search, 'ig');
 
-  return option.name.replace(regEx, `<span style="font-weight: 900;">${search}</span>`)
+  return option.name.replace(regEx, `<span style="font-weight: 900;">${search}</span>`);
 }
 
 </script>

@@ -1,4 +1,3 @@
-
 <template functional>
 <div class="cont">
   <div class="lds-ring" :style="{width:`${Number(props.size)+5}px`, height:`${Number(props.size)+5}px`}">
@@ -12,7 +11,6 @@
   </div>
 </div>
 </template>
-
 
 <style scoped>
 .cont{ position: relative; width: 45px; height: 47px; background-color: transparent;}

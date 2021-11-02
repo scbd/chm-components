@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import Card from './Card/index.vue'
+import Card from './Card/index.vue';
 
 export default {
   name      : 'SearchList',
@@ -13,22 +13,20 @@ export default {
   props     : {
     rows    : { type: Array, required: true },
     options : { type: Object, required: true },
-    onScroll: { type: Function, required: true }
+    onScroll: { type: Function, required: true },
   },
   methods: { cardProps },
   mounted,
-  beforeDestroy
-}
+  beforeDestroy,
+};
 
-function mounted(){ window.addEventListener('scroll', this.onScroll(this.$el)) }
+function mounted() { window.addEventListener('scroll', this.onScroll(this.$el)); }
 
-function beforeDestroy(){ window.removeEventListener('scroll', this.onScroll(this.$el)) }
+function beforeDestroy() { window.removeEventListener('scroll', this.onScroll(this.$el)); }
 
-function cardProps(action={}){ return { ...action, options: this.options } }
+function cardProps(action = {}) { return { ...action, options: this.options }; }
 
 </script>
 <style scoped>
   .list{margin: 60px 0 0 0;}
 </style>
-
-

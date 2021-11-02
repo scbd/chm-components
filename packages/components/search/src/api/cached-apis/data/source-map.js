@@ -1,3 +1,4 @@
+// eslint-disable-next-line import/prefer-default-export
 export const sourceMap = {
   decision                              : 'schemas',
   capacityBuildingInitiative            : 'schemas',
@@ -439,5 +440,5 @@ export const sourceMap = {
   '743D2F85-8ABA-4F35-BC83-30D295343EA8': 'regions',
   '0451E289-BC9E-4F9D-95C0-B28A20F86BE9': 'regions',
   '9EED1DD1-BA36-41F1-BEF9-63021AB24EBF': 'regions',
-  '952F18B8-BB83-4C7E-9232-7B3E3EA64A3C': 'regions'
-}
+  '952F18B8-BB83-4C7E-9232-7B3E3EA64A3C': 'regions',
+};

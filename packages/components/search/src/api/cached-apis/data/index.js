@@ -1,5 +1,5 @@
-export { schemas } from './schemas.js'
-export { sourceMap } from './source-map.js'
+export { schemas } from './schemas';
+export { sourceMap } from './source-map';
 export const sdgsShort = {
   en: [
     '1. No Poverty',
@@ -18,8 +18,6 @@ export const sdgsShort = {
     '14. Life Below Water',
     '15. Life on Land',
     '16. Peace and Justice Strong Institutions',
-    '17. Partnerships to achieve the Goal'
-  ]
-}
-
-
+    '17. Partnerships to achieve the Goal',
+  ],
+};
