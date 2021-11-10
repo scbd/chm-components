@@ -25,7 +25,7 @@
 </template>
 
 <script>
-import { lookUp   } from '../../../api/cached-apis/index';
+import { lookUp } from '@action-agenda/cached-apis';
 
 import   HorzCardAction   from './CardBody.vue';
 import   i18n              from '../../../locales/index';
@@ -60,14 +60,6 @@ async function created() {
 }
 
 function status() { return this.meta.status; }
-
-// function stripTrailingSlash (str){
-//   return str.endsWith('/') ?
-//     str.slice(0, -1) :
-//     str;
-// }
-// function getStatusUrl (id, status){
-// return `${this.options.api}/v2019/actions/${id}/status/${status}` }
 
 function dateFormat(date) {
   const d = new Date(date);

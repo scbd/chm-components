@@ -62,11 +62,11 @@
 
 <script>
 import Multiselect from './multi-select/index';
-// import Icon        from '~/components/Icons/Icon'
+import Icon        from '../Icons/Icon.vue';
 
 export default {
   name      : 'SCBDSelect',
-  components: { Multiselect },
+  components: { Multiselect, Icon },
   props     : {
     name         : {},
     id           : { type: String, required: true },

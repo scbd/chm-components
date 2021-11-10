@@ -20,8 +20,7 @@
 </template>
 
 <script>
-import { getData, lookUp } from '../api/cached-apis/index';
-// import { getData          , lookUp } from '~/components/api/cached-apis/index'
+import { getData, lookUp } from '@action-agenda/cached-apis/dist/legacy/cjs/index.common';
 import { getList          }          from '../api/index';
 import   AllFiltersSelect            from './AllFiltersSelect.vue';
 import   i18n                        from '../locales';
@@ -37,16 +36,6 @@ export default {
   errorCaptured,
   i18n,
   mounted,
-  watch: {
-    // eslint-disable-next-line func-names
-    '$route.query.filter': function () {
-      // this.show=false
-      // this.$nextTick(() => setTimeout(()=>this.filters=[], 50))
-      // this.$nextTick(() => setTimeout(this.readSearchParams, 250))
-      //   this.$nextTick(() => setTimeout(this.initialize, 350))
-      // this.$nextTick(() => setTimeout(() => this.show=true, 2000))
-    },
-  },
 };
 
 async function created() {
@@ -55,9 +44,7 @@ async function created() {
 
 function mounted() {
   this.readSearchParams();
-  // this.$emit('$scbdFilterChange')
   setTimeout(() => { this.readSearchParams(); this.$emit('$scbdFilterChange'); }, 1000);
-  // setTimeout(()=>{ this.readSearchParams(); this.$emit('$scbdFilterChange')}, 3000)
 }
 function  data() {
   return {

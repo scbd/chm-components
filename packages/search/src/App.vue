@@ -35,18 +35,10 @@ export default {
   errorCaptured,
   i18n,
   mounted,
-  watch   : {
-    // eslint-disable-next-line func-names
-    '$route.query.filter': function () { this.onScbdFilterChange(); },
-  },
 };
 
 async function created() {
-  const { $router, $store, $refs } = this;
-
-  const $el = $refs.navFilter;
-
-  initializeApi({ ...this.opts }, { $store, $router, $el });
+  initializeApi({ api: 'https://api.cbd.int/api' });
 
   await this.setRowsAndTotal();
 }
