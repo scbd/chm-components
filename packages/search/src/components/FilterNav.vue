@@ -70,10 +70,10 @@ async function initialize() {
   const onlyOptionsUsed             = [];
 
   // eslint-disable-next-line no-restricted-syntax
-  for (const { filter, item } of [ ...allOptionGroups ]) {
+  for (const { filter, data } of [ ...allOptionGroups ]) { // eslint-disable-line no-shadow
     const cloneGroup = { filter };
 
-    cloneGroup.data = item.filter(({ identifier }) => allFiltersUsed.has(identifier));
+    cloneGroup.data = data.filter(({ identifier }) => allFiltersUsed.has(identifier));
 
     onlyOptionsUsed.push(cloneGroup);
   }
@@ -84,9 +84,9 @@ async function initialize() {
   this.countsMap = counts.filterCounts;
 }
 
-function updateSearchQuery(onComplete) {
-  this.resetSearchParams();
-  this.$nextTick(() => this.addParam(this.filters.map(({ identifier }) => identifier), onComplete));
+function updateSearchQuery() {
+  resetSearchParams();
+  this.filters.forEach(({ identifier }) => addParam(identifier));
 }
 
 const  isPlainObject = (o) => Object.prototype.toString.call(o) === '[object Object]' && o?.constructor?.name === 'Object';
@@ -110,18 +110,6 @@ async function addFilter(identifier) {
   this.filters = unique(this.filters);
 }
 
-// function readSearchParams() {
-//   const { query  } = this.$route;
-//   const { filter } = query;
-
-//   if (!filter) return;
-
-//   if (Array.isArray(filter)) {
-//     // eslint-disable-next-line no-restricted-syntax
-//     for (const identifier of Array.from(new Set(query.filter))) { this.addFilter(identifier); }
-//   } else this.addFilter(filter);
-// }
-
 function readSearchParams() {
   const params  = (new URL(document.location)).searchParams;
   const filters = params.getAll('filter');
@@ -129,12 +117,20 @@ function readSearchParams() {
   filters.forEach((identifier) => this.addFilter(identifier));
 }
 
-function resetSearchParams() { delete this.$route.query.filter; }
+function resetSearchParams() {
+  const { href, search } = window.location;
+  const newUrl           = href.replace(search, '');
 
-function addParam(values, onComplete) {
-  const query = { filter: values };
+  window.history.pushState({ path: newUrl }, '', newUrl);
+}
 
-  this.$router.push({ query }, onComplete);
+function addParam(value) {
+  const { origin, search, pathname } = new URL(window.location);
+  const newSearchParam               = `filter=${encodeURIComponent(value)}`;
+  const newSearch                    = !search ? `?${newSearchParam}` : `${search}&${newSearchParam}`;
+  const newUrl                       = `${origin}${pathname}${newSearch}`;
+
+  window.history.pushState({ path: newUrl }, '', newUrl);
 }
 
 function injectTextAsOption(text) {
@@ -147,7 +143,8 @@ function injectTextAsOption(text) {
 function addTextSearch(text) {
   this.injectTextAsOption(text);
 
-  this.$nextTick(() => this.updateSearchQuery(() => this.$emit('$scbdFilterChange')));
+  setTimeout(() => this.updateSearchQuery(), 100);
+  setTimeout(() => this.$emit('$scbdFilterChange'), 600);
 }
 
 function createTextFilterObject(name) { return { identifier: `FREETEXT-${name}`, name }; }

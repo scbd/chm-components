@@ -20,13 +20,9 @@ export const getApi = async () => {
 };
 
 async function readSearchParams() {
-  const { $router } = await getOptions();
+  const params = (new URL(document.location)).searchParams;
 
-  const f = $router.app?.$route?.query?.filter;
-
-  const filter = f ? Array.isArray(f) ? f : [ f ] : '';
-
-  return filter;
+  return params.getAll('filter');
 }
 
 function feedQueryFunc(filters) {

@@ -1,4 +1,4 @@
-const globalProps = { options: { api: 'https://api.cbd.int/api' } };
+const globalProps = { options: { api: 'https://api.cbd.int/api/v2013/index/select' } };
 
 export const getOptions = () => new Promise(loadingIntervalOptions);
 

@@ -10,7 +10,7 @@ function not(fun) {
 
 function includes(str, query) {
   /* istanbul ignore else */
-  let stringTemp;
+  let stringTemp = str;
   if (str === undefined) stringTemp = 'undefined';
   if (str === null) stringTemp = 'null';
   if (str === false) stringTemp = 'false';

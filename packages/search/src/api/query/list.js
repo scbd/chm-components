@@ -1,8 +1,8 @@
-import   axios                                     from 'axios';
+import axios from 'axios';
 import { getNextPage, resetPaging, getIsPageZero } from './paging';
-import { getOptions  }                             from './options';
-import   getQuery, { countryQuery, getApi, feedQuery }                                  from './query';
-import { hasCache, setCache, getCache }         from './cache';
+import { getOptions } from './options';
+import getQuery, { countryQuery, getApi, feedQuery } from './query';
+import { hasCache, setCache, getCache } from './cache';
 
 export const feed = async (filters) => {
   const api    = await getApi();
@@ -23,7 +23,8 @@ export const list = async (next = false) => {
 
     const [ api, params ] = await getQuery(next);
 
-    const rows = hasCache(params) ? getCache(params) : await axios.get(api, { params }).then(calculateCounts);
+    const rows = hasCache(params) ? getCache(params)
+      : await axios.get(api, { params }).then(calculateCounts);
 
     if (!hasCache(params)) setCache(params, rows);
 
@@ -38,6 +39,7 @@ export const list = async (next = false) => {
     return console.error(e);
   }
 };
+
 export const countryList = async (filter) => {
   try {
     const api    = await getApi();

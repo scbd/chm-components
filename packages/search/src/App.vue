@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <div class="stick" >
-      <FilterNav v-if="opts.show" ref='navFilter'  />
+      <FilterNav v-if="opts.show" ref='navFilter'/>
       <Feedback v-bind="{ total, page, totalPages, loading }" />
     </div>
     <List v-if="total && rows.length" :rows="rows" :options="opts" :on-scroll="onScroll"  />
@@ -34,17 +34,20 @@ export default {
   data,
   errorCaptured,
   i18n,
-  mounted,
+
 };
 
 async function created() {
   initializeApi();
 
-  await this.setRowsAndTotal();
-}
-
-function mounted() {
   if (this.opts.preLoadFilter) this.preLoadFilter(this.opts.preLoadFilter);
+  await this.setRowsAndTotal();
+  window.document.addEventListener('$me', async () => {
+    if (!this.me || !this.me.isAuthenticated) return;
+    await this.setRowsAndTotal();
+  });
+
+  if (this.opts.listenExternally) { window.document.addEventListener('$scbdFilterChange', this.onScbdFilterChange); }
 }
 
 function data() {
@@ -57,7 +60,8 @@ function opts() {  return { ...getDefaultOptions({}, this.forceEnv),  ...this.op
 function onScroll($el) {
   const self = this;
 
-  if (0) updateOptions({ $el });
+  updateOptions({ $el });
+
   return async () => {
     if (process.server) return;
 
@@ -112,12 +116,20 @@ async function setRowsAndTotal() {
   this.loading = false;
 }
 
-function preLoadFilter(newQuery) {
-  if (!newQuery) return;
+function preLoadFilter(filter) {
+  if (!filter) return;
 
-  const query = this.$route.params.query ? mergeDeep(this.$route.params.query, newQuery) : newQuery;
+  addSearchParam(filter);
+}
 
-  this.$router.push({ query }, () => this.onScbdFilterChange());
+function addSearchParam(value) {
+  const { origin, search, pathname } = new URL(window.location);
+  const newSearchParam               = `filter=${encodeURIComponent(value)}`;
+  const hasFilterAlready             = search.includes(value);
+  const newSearch                    = !search ? `?${newSearchParam}` : `${search}&${newSearchParam}`;
+  const newUrl                       = `${origin}${pathname}${hasFilterAlready ? search : newSearch}`;
+
+  window.history.pushState({ path: newUrl }, '', newUrl);
 }
 
 function top() {
@@ -140,51 +152,10 @@ function getWidth() {
 
   return Math.max(window.document.documentElement.clientWidth || 0, window.innerWidth || 0);
 }
+
 function errorCaptured(err) {
   console.error('Search error:', err);
   console.error(err);
-}
-
-function mergeDeep(target, source, isMergingArrays = false) {
-  // eslint-disable-next-line no-param-reassign
-  target = ((obj) => {
-    let cloneObj;
-
-    try {
-      cloneObj = JSON.parse(JSON.stringify(obj));
-    } catch (err) {
-      cloneObj = { ...obj };
-    }
-    return cloneObj;
-  })(target);
-
-  const isObject = (obj) => obj && typeof obj === 'object';
-
-  if (!isObject(target) || !isObject(source)) return source;
-
-  Object.keys(source).forEach((key) => {
-    const targetValue = target[key];
-    const sourceValue = source[key];
-
-    if (Array.isArray(targetValue) && Array.isArray(sourceValue)) {
-      if (isMergingArrays) {
-        // eslint-disable-next-line no-param-reassign
-        target[key] = targetValue.map((x, i) => (sourceValue.length <= i
-          ? x
-          : mergeDeep(x, sourceValue[i], isMergingArrays)));
-        // eslint-disable-next-line no-param-reassign
-        if (sourceValue.length > targetValue.length) {
-          target[key] = target[key].concat(sourceValue.slice(targetValue.length)); // eslint-disable-line no-param-reassign
-        }
-      } else {
-        target[key] = targetValue.concat(sourceValue); // eslint-disable-line no-param-reassign
-      }
-    } else if (isObject(targetValue) && isObject(sourceValue)) {
-      target[key] = mergeDeep({ ...targetValue }, sourceValue, isMergingArrays); // eslint-disable-line no-param-reassign
-    } else { target[key] = sourceValue; }// eslint-disable-line no-param-reassign
-  });
-
-  return target;
 }
 </script>
 
