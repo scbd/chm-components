@@ -60,8 +60,9 @@ function  data() {
 }
 
 function onChange() {
-  this.updateSearchQuery(() => this.$emit('$scbdFilterChange'));
-  this.$nextTick(() => setTimeout(this.initialize, 1000));
+  setTimeout(this.updateSearchQuery, 100);
+  setTimeout(() => this.$emit('$scbdFilterChange'), 600);
+  setTimeout(() => this.initialize(), 800);
 }
 
 async function initialize() {

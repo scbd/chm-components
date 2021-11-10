@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <div class="stick" >
-      <FilterNav v-if="opts.show" ref='navFilter'/>
+      <FilterNav v-if="opts.show" @$scbdFilterChange="onScbdFilterChange" ref='navFilter'/>
       <Feedback v-bind="{ total, page, totalPages, loading }" />
     </div>
     <List v-if="total && rows.length" :rows="rows" :options="opts" :on-scroll="onScroll"  />
