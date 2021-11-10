@@ -38,7 +38,7 @@ export default {
 };
 
 async function created() {
-  initializeApi({ api: 'https://api.cbd.int/api' });
+  initializeApi();
 
   await this.setRowsAndTotal();
 }
@@ -57,7 +57,7 @@ function opts() {  return { ...getDefaultOptions({}, this.forceEnv),  ...this.op
 function onScroll($el) {
   const self = this;
 
-  updateOptions({ $el });
+  if (0) updateOptions({ $el });
   return async () => {
     if (process.server) return;
 

@@ -1,4 +1,4 @@
-import { initializeApiStore } from '@action-agenda/cached-apis/dist/legacy/cjs/index.common';
+import { initializeApiStore } from '@action-agenda/cached-apis';
 import { initializeOptions  } from './query/options';
 import { clearCache         } from './query/cache';
 

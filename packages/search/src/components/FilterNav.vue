@@ -20,7 +20,7 @@
 </template>
 
 <script>
-import { getData, lookUp } from '@action-agenda/cached-apis/dist/legacy/cjs/index.common';
+import { getData, lookUp } from '@action-agenda/cached-apis';
 import { getList          }          from '../api/index';
 import   AllFiltersSelect            from './AllFiltersSelect.vue';
 import   i18n                        from '../locales';
@@ -110,16 +110,23 @@ async function addFilter(identifier) {
   this.filters = unique(this.filters);
 }
 
+// function readSearchParams() {
+//   const { query  } = this.$route;
+//   const { filter } = query;
+
+//   if (!filter) return;
+
+//   if (Array.isArray(filter)) {
+//     // eslint-disable-next-line no-restricted-syntax
+//     for (const identifier of Array.from(new Set(query.filter))) { this.addFilter(identifier); }
+//   } else this.addFilter(filter);
+// }
+
 function readSearchParams() {
-  const { query  } = this.$route;
-  const { filter } = query;
+  const params  = (new URL(document.location)).searchParams;
+  const filters = params.getAll('filter');
 
-  if (!filter) return;
-
-  if (Array.isArray(filter)) {
-    // eslint-disable-next-line no-restricted-syntax
-    for (const identifier of Array.from(new Set(query.filter))) { this.addFilter(identifier); }
-  } else this.addFilter(filter);
+  filters.forEach((identifier) => this.addFilter(identifier));
 }
 
 function resetSearchParams() { delete this.$route.query.filter; }
