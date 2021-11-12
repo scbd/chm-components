@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "@action-agenda/cached-apis": "^1.0.13",
+    "@action-agenda/icons": "^1.0.6",
     "@houlagins/default-options": "~1.0.0",
     "@houlagins/load-http": "~1.0.1",
     "@houlagins/locale": "~1.0.0",

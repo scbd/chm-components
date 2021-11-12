@@ -24,7 +24,9 @@ function mounted() { window.addEventListener('scroll', this.onScroll(this.$el));
 
 function beforeDestroy() { window.removeEventListener('scroll', this.onScroll(this.$el)); }
 
-function cardProps(action = {}) { return { ...action, options: this.options }; }
+function cardProps(action = {}) {
+  return { ...action, options: this.options };
+}
 
 </script>
 <style scoped>

@@ -34,7 +34,10 @@
     </template>
 
     <template  slot="placeholder" >
-      <Icon name="search"/> {{placeholder[0]}} {{placeholder[1]}} <Icon name="filter"/> {{placeholder[2]}}
+      <Icon name="search"/>
+      {{placeholder[0]}} {{placeholder[1]}}
+       <Icon name="filter"/>
+       {{placeholder[2]}}
     </template>
 
     <template  slot="option" slot-scope="props" >
@@ -61,8 +64,9 @@
 </template>
 
 <script>
+import { Icon }    from '@action-agenda/icons';
 import Multiselect from './multi-select/index';
-import Icon        from '../Icons/Icon.vue';
+// import Icon        from '../Icons/Icon.vue';
 
 export default {
   name      : 'SCBDSelect',
