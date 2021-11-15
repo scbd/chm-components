@@ -24,6 +24,7 @@ import { getData, lookUp } from '@action-agenda/cached-apis';
 import { getList          }          from '../api/index';
 import   AllFiltersSelect            from './AllFiltersSelect.vue';
 import   i18n                        from '../locales';
+import {  removeFilter } from '../utils/utils';
 
 export default {
   name      : 'SearchFilterNav',
@@ -119,10 +120,7 @@ function readSearchParams() {
 }
 
 function resetSearchParams() {
-  const { href, search } = window.location;
-  const newUrl           = href.replace(search, '');
-
-  window.history.pushState({ path: newUrl }, '', newUrl);
+  removeFilter('filter');
 }
 
 function addParam(value) {

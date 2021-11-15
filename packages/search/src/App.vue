@@ -6,7 +6,7 @@
         @$scbdFilterChange="onScbdFilterChange"
         ref="navFilter"
       />
-      <Feedback v-bind="{ total, page, totalPages, loading }" />
+      <Feedback v-bind="{ total, page, totalPages, loading }"   @$scbdFilterChange="onScbdFilterChange" />
     </div>
     <List
       v-if="total && rows.length"
@@ -108,7 +108,6 @@ function onScroll($el) {
 
     self.loading = true;
     window.addEventListener('$nextPageLoaded', self.onNextPageLoaded);
-
     const nextPageRows = await getList(true);
 
     self.rows.push(...nextPageRows.rows);
@@ -217,7 +216,7 @@ function errorCaptured(err) {
   position: absolute;
   bottom: 0;
   left: 50%;
-  background-color: burlywood;
+  /* background-color: burlywood; */
 }
 .stick {
   position: sticky;
