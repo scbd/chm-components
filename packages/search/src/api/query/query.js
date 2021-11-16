@@ -68,14 +68,20 @@ function defaultQuery ({ filters, page }){ // eslint-disable-line
 
   const schemaQ = `(schema_s:(${cbSchemas.join(' ')})${filterQ}${textQueries})`;
 
-  const params                = (new URL(document.location)).searchParams;
-  const updatedDateSortFilter = params.get('sort') ? params.get('sort') : 'updatedDate_dt desc';
+  const params = (new URL(document.location)).searchParams;
+  // const updatedDateSortFilter = 'updatedDate_dt desc';
+  const sortFilter = params.get('sort') ? params.get('sort') : 'updatedDate_dt desc';
+
+  // const createdDateSortFilter = 'createdDate_dt desc';
+  // const createdDateSortFilter = params.get('sort') ? params.get('sort') : 'createdDate_dt desc';
 
   // eslint-disable-next-line max-len
   const vlr  = `(schema_s:resource AND all_terms_ss:(CBD-SUBJECT-BBI 9D6E1BC7-4656-46A7-B1BC-F733017B5F9B 16CEAEC3B006443A903284CA65C73C29 A5C5ADE8-2061-4AB8-8E2D-1E6CFF5DD793 3813BA1A-2DE7-4DD5-8415-3B2C6737E567 9F48AEA0-EE28-4B6F-AB91-E0E088A8C6B7 05FA6F66-F942-4713-BB4C-DA032C111188 5831C357-95CA-4F09-963B-DF9E8AFD8C88 5054AC52-E738-4694-A403-6490FE7D4CF4)${filterQ}${textQueries})`;
   const scbd = `(schema_s:(${scbdSchemas.join(' ')}) AND (${baseTextQueries()})${filterQ}${textQueries})`;
-  const sort = `${updatedDateSortFilter}, startDate_dt desc, endDate_dt desc, endDate_dt desc, createdDate_dt desc`;
+  // const sort = `${updatedDateSortFilter},
+  //  startDate_dt desc, endDate_dt desc, ${createdDateSortFilter}`;
 
+  const sort = sortFilter;
   urlSearchParams.set('q', `(${defaultQ}(${schemaQ} OR ${vlr} OR ${scbd}))`);
 
   urlSearchParams.set('rows', rows);

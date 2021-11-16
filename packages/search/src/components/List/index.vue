@@ -1,6 +1,6 @@
 <template >
   <div class="list" ref="list">
-    <card  v-for="(action,index) in rows" v-bind:key="index"   v-bind="cardProps(action)"/>
+    <card  v-for="(action,index) in rows" v-bind:key="index"   v-bind="cardProps(action)" />
   </div>
 </template>
 

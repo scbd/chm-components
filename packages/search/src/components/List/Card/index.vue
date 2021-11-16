@@ -8,7 +8,6 @@
       </div>
 
     </div>
-
     <!-- TAB 1 -->
     <HorzCardAction  v-bind="$props" />
 
