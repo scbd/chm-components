@@ -15,7 +15,7 @@
     <div class="card-footer">
 
       <div class="btn-group" role="group" aria-label="Card actions, view, edit publish, reject">
-        <a :href="url" target="_blank" rel="nopener noreferrer" type="button" class="btn btn-primary btn-sm">{{$t('View Action')}}</a>
+        <a :href="url" target="_blank" rel="nopener noreferrer" type="button" class="btn btn-primary btn-sm">{{$t('View record')}}</a>
       </div>
 
       <small class="text-muted float-right">{{dateTime|dateFormat}}</small>

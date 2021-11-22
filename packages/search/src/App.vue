@@ -1,5 +1,6 @@
 <template>
   <div id="app">
+    <Icons v-once/>
     <div class="stick">
       <FilterNav
         v-if="opts.show"
@@ -19,6 +20,7 @@
 
 <script>
 
+import Icons from '@action-agenda/icons';
 import i18n from './locales/index';
 
 import { getList, initializeApi, updateOptions } from './api/index';
@@ -30,8 +32,10 @@ import Feedback from './components/Feedback.vue';
 
 export default {
   name      : 'PortalAppSearch',
-  components: { FilterNav, Feedback, List },
-  props     : {
+  components: {
+    FilterNav, Feedback, List, Icons,
+  },
+  props: {
     options : { type: Object, required: false },
     forceEnv: { type: String, required: false, default: 'production' },
   },

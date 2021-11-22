@@ -34,9 +34,9 @@
     </template>
 
     <template  slot="placeholder" >
-      <Icon name="search"/>
+      <Icon height="16" width="16" name="search"/>
       {{placeholder[0]}} {{placeholder[1]}}
-       <Icon name="filter"/>
+       <Icon height="16" width="16" name="filter"/>
        {{placeholder[2]}}
     </template>
 

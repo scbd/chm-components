@@ -29,6 +29,7 @@
               <option value="asc">asc</option>
               <option value="desc">desc</option>
             </select>
+
           </div>
           <div class="col-4 my-auto text-right">
             <span v-if="totalPages && totalPages > 1" class="text-nowrap">
