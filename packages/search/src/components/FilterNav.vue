@@ -75,7 +75,8 @@ async function initialize() {
   for (const { filter, data } of [ ...allOptionGroups ]) { // eslint-disable-line no-shadow
     const cloneGroup = { filter };
 
-    cloneGroup.data = data.filter(({ identifier }) => allFiltersUsed.has(identifier));
+    cloneGroup.filter = filter.en;
+    cloneGroup.data   = data.filter(({ identifier }) => allFiltersUsed.has(identifier));
 
     onlyOptionsUsed.push(cloneGroup);
   }

@@ -114,10 +114,11 @@ function sort(key) {
   this.sortType       = key || this.sortType;
   const url           = new URL(window.location);
   let sortBY          = 'updatedDate_dt';
-  if (key === 'name') {
+
+  if (this.sortType === 'name') {
     sortBY = 'title_t';
   }
-  if (key === 'created') {
+  if (this.sortType === 'created') {
     sortBY = 'createdDate_dt';
   }
 

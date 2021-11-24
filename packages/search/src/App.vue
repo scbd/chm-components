@@ -114,7 +114,9 @@ function onScroll($el) {
     window.addEventListener('$nextPageLoaded', self.onNextPageLoaded);
     const nextPageRows = await getList(true);
 
-    self.rows.push(...nextPageRows.rows);
+    const rows = nextPageRows.rows.filter((el) =>   el.name !== undefined && el.description !== undefined);
+
+    self.rows.push(...rows);
   };
 }
 
@@ -149,7 +151,7 @@ async function setRowsAndTotal() {
   const { total, rows } = await getList();
 
   this.total   = total;
-  this.rows    = rows;
+  this.rows    = rows.filter((el) =>   el.name !== undefined && el.description !== undefined);
   this.loading = false;
 }
 
