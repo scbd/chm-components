@@ -19,7 +19,3 @@ export default {
   name: 'CardButtons',
 };
 </script>
-
-<style>
-
-</style>

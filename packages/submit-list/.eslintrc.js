@@ -35,7 +35,7 @@ module.exports = {
     'import/no-named-as-default'   : 0,
     'no-nested-ternary'            : [ 'off' ],
     'vue/no-multiple-template-root': [ 'off' ],
-    'vue/no-v-for-template-key'    :['off'],
+    'vue/no-v-for-template-key'    : [ 'off' ],
 
     // vvv airbnb-base overrides fix vvv
     'import/extensions': [ 'error', 'ignorePackages', {

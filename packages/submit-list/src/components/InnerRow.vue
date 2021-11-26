@@ -2,12 +2,12 @@
   <div class="row" :class="{ 'row-bottom-border': bottomBorder }">
     <div class="col-3">
       <h5 style="padding-top: 0; margin-top: 0">
-        {{ details.name }}
+        {{ details.name.en }}
       </h5>
     </div>
     <div class="col-6">
       <p style="font-size: 12px">
-        {{ details.description }}
+        {{ details.description.en }}
       </p>
     </div>
     <div class="col-2">
@@ -27,7 +27,7 @@
           <a
             translation-url=""
             class="btn btn-info btn-sm mr-2"
-            href="/submit/nationalReport?type=nbsap"
+            :href="details.listUri"
             data-toggle="tooltip"
             title=""
             data-original-title="Record List"
@@ -36,7 +36,7 @@
           <a
             translation-url=""
             class="btn btn-primary btn-sm"
-            href="/submit/nationalReport/new?type=nbsap"
+            :href="details.addUri"
             data-toggle="tooltip"
             title=""
             data-original-title="Add New Record"
@@ -62,6 +62,3 @@ export default {
   },
 };
 </script>
-
-<style>
-</style>
