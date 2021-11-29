@@ -16,9 +16,9 @@
     <span id="gov-types">{{this.govTypes.length}}</span><br/>
     <span id="regions">{{this.regions.length}}</span><br/>
     <span id="geo-locations">{{this.geoLocations.length}}</span><br/>
-    <span id="sdgs">{{this.sdgs}}</span><br/>
+    <span id="sdgs">{{this.sdgs.length}}</span><br/>
     <span id="action-categories">{{this.actionCategories.length}}</span><br/>
-    <span id="action-categories">{{this.schema}}</span><br/>
+    <span id="action-categories">{{this.schemas}}</span><br/>
 <hr>
 <hr>
     <span id="lu-all">{{this.lookupAll.length}}</span><br/>
@@ -33,6 +33,8 @@
     <span id="lu-geo-locations">{{this.lookupGeoLocations.length}}</span><br/>
     <span id="lu-sdgs">{{this.lookupSdgs.length}}</span><br/>
     <span id="lu-action-categories">{{typeof this.lookupActionCategories === 'object'}}</span><br/>
+    <span id="lu-schemas">{{this.lookupSchemas}}</span><br/>
+
     <hr/>
     {{this.dataSources}}
   </div>
@@ -80,7 +82,8 @@ function data(){
     isSameAsReverse       : [],
     hasAltName            : false,
     dataSources           : [],
-    schema                : []
+    schemas               : [],
+    lookupSchemas         : []
   }
 }
 
@@ -100,7 +103,7 @@ async function mounted(){ // eslint-disable-line
   this.geoLocations     = await CachedApis.getGeoLocations()
   this.sdgs             = (await CachedApis.getSdgs()).map(({ alternateName }) => ({ [alternateName]: alternateName }))
   this.actionCategories = await CachedApis.getActionCategories()
-  this.schema           = await CachedApis.getSchema()
+  this.schemas           = await CachedApis.getSchemas()
 
 
   this.lookupAll              = await CachedApis.getAllByKey([ '528B1187-F1BD-4479-9FB3-ADBD9076D361', 'ca' ])
@@ -115,9 +118,9 @@ async function mounted(){ // eslint-disable-line
   this.lookupGeoLocations     = await CachedApis.getGeoLocationsByKey('743D2F85-8ABA-4F35-BC83-30D295343EA8')
   this.lookupSdgs             = await CachedApis.getSdgsByKey('SDG-GOAL-05')
   this.lookupActionCategories = await CachedApis.getActionCategoriesByKey('FRESHWATER-COASTAL-AND-OCEAN-ECOSYSTEMS', true)
-  this.lookupFalsey = await CachedApis.lookUp('countries', 'COASTAL-AND-OCsAN')
-
-  this.dataSources = await CachedApis.lookUpSource('SDG-GOAL-05')
+  this.lookupFalsey           = await CachedApis.lookUp('countries', 'COASTAL-AND-OCsAN')
+  this.lookupSchemas          = await CachedApis.getSchemasByKey([ 'pressRelease', 'undbParty' ])
+  this.dataSources            = await CachedApis.lookUpSource('SDG-GOAL-05')
 }
 
 async function buildSourceMap(){

@@ -6,7 +6,7 @@ import { get$http    } from '@houlagins/load-http'
 import { getLString }  from './data/i18n.mjs'
 
 import   getDefaultOptions                                                              from './default-options.mjs'
-import { sourceMap, sdgsShort, orgTypeOther, actionCategories, isSameAsActionCat, documentStates } from './data/index.mjs'
+import { sourceMap, sdgsShort, orgTypeOther, actionCategories, isSameAsActionCat, documentStates, schemas } from './data/index.mjs'
 
 const scbdCMSLocale = () => {
   if(typeof window === 'undefined') return ''
@@ -42,7 +42,7 @@ export const getData  = async (dataSource, noCache=false) => {
   if(dataSource === 'actionCategories') return getSanitizedActionCategories()
   if(dataSource === 'documentStates')   return documentStates.map(sanitize)
   if(dataSource === 'all')              return generateAll()
-  if(dataSource === 'schema')           return getActionCategoriesSchema()
+  if(dataSource === 'schemas')           return getActionCategoriesSchemas()
 
 
   return getFromApi(dataSource,  aichiOrSdgs? 'identifier' : undefined).then((res) => {
@@ -93,7 +93,7 @@ export const getGeoLocations     = () => getData('geoLocations')
 export const getSdgs             = () => getData('sdgs')
 export const getActionCategories = () => getData('actionCategories')
 export const getDocumentStates   = () => getData('documentStates')
-export const getSchema           = () => getData('schema')
+export const getSchemas           = () => getData('schemas')
 
 export const getAllByKey              = (keys, single=false) => lookUp('all', keys, single)
 export const getJurisdictionsByKey    = (keys, single=false) => lookUp('jurisdictions', keys, single)
@@ -107,6 +107,7 @@ export const getGeoLocationsByKey     = (keys, single=false) => lookUp('geoLocat
 export const getSdgsByKey             = (keys, single=false) => lookUp('sdgs', keys, single)
 export const getActionCategoriesByKey = (keys, single=false) => lookUp('actionCategories', keys, single)
 export const getDocumentStatesByKey   = (keys, single=false) => lookUp('documentStates', keys, single)
+export const getSchemasByKey             = (keys, single=false) => lookUp('schemas', keys, single)
 
 
 export const generateAll = async () => { // eslint-disable-line
@@ -122,7 +123,7 @@ export const generateAll = async () => { // eslint-disable-line
     getData('subjects'),
     getData('countries'),
     getData('regions'),
-    getData('schema')
+    getData('schemas')
   ])
 
   const all = [
@@ -136,7 +137,7 @@ export const generateAll = async () => { // eslint-disable-line
     { filter: getLString('Subjects'),           data: allData[7] || [] },
     { filter: getLString('Countries'),          data: allData[8] || [] },
     { filter: getLString('Regions'),            data: allData[9] || [] },
-    { filter: getLString('schema'),            data: allData[10] || [] }
+    { filter: getLString('schemas'),            data: allData[10] || [] }
   ]
 
   const saveCache = !(allData.map(data => data.length)).includes(0)
@@ -295,8 +296,8 @@ function getSanitizedActionCategories(){
   return Array.from(actionCategories).map(sanitize).sort((a, b) => a['name'].localeCompare(b['name']))
 }
 
-function getActionCategoriesSchema(){
-  return Array.from(actionCategories).map(sanitizeSchema).sort((a, b) => a['name'].localeCompare(b['name']))
+function getActionCategoriesSchemas(){
+  return Array.from(schemas).map(sanitizeSchema)
 }
 
 function sanitizeSchema(aDataItem){

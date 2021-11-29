@@ -2,6 +2,8 @@ import i18n from './locales.mjs'
 import { getLString } from './i18n.mjs'
 
 export { actionCategories, isSameAsActionCat } from './action-cats.mjs'
+export { schemas } from './schemas.mjs'
+
 export { sourceMap } from './source-map.mjs'
 export const sdgsShort = getShortSdgs()
 
@@ -35,22 +37,22 @@ function getShortSdgs(){
 
 function getShortEnSdgs(){
   return [
-      '1. No Poverty',
-      '2. Zero Hunger',
-      '3. Good Health and Well-being',
-      '4. Quality Education',
-      '5. Gender Equality',
-      '6. Clean Water and Sanitation',
-      '7. Affordable and Clean Energy',
-      '8. Decent Work and Economic Growth',
-      '9. Industry, Innovation and Infrastructure',
-      '10. Reduced Inequality',
-      '11. Sustainable Cities and Communities',
-      '12. Responsible Consumption and Production',
-      '13. Climate Action',
-      '14. Life Below Water',
-      '15. Life on Land',
-      '16. Peace and Justice Strong Institutions',
-      '17. Partnerships to achieve the Goal'
-    ]
+    '1. No Poverty',
+    '2. Zero Hunger',
+    '3. Good Health and Well-being',
+    '4. Quality Education',
+    '5. Gender Equality',
+    '6. Clean Water and Sanitation',
+    '7. Affordable and Clean Energy',
+    '8. Decent Work and Economic Growth',
+    '9. Industry, Innovation and Infrastructure',
+    '10. Reduced Inequality',
+    '11. Sustainable Cities and Communities',
+    '12. Responsible Consumption and Production',
+    '13. Climate Action',
+    '14. Life Below Water',
+    '15. Life on Land',
+    '16. Peace and Justice Strong Institutions',
+    '17. Partnerships to achieve the Goal'
+  ]
 }

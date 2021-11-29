@@ -19,7 +19,7 @@ const apisUrls = {
 // #endregion apisUrls
 
 // #region dataSources
-const dataSources = [ ...Object.keys(apisUrls), 'geoLocations', 'actionCategories', 'all', 'documentStates', 'schema' ]
+const dataSources = [ ...Object.keys(apisUrls), 'geoLocations', 'actionCategories', 'all', 'documentStates', 'schemas' ]
 // #endregion dataSources
 
 const dev           = { name: libName, expiry, apisUrls, dataSources, version   }
