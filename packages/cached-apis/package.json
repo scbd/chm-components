@@ -49,7 +49,8 @@
     "test:e2e:headless": "vue-cli-service test:e2e --headless",
     "lint": "vue-cli-service lint --ext .js,.mjs",
     "link": "lerna link",
-    "release": "yarn publish --access=public --tag latest"
+    "release": "yarn publish --access=public --tag latest",
+    "clean-reinstall": "rm -f yarn.lock rm -f package-lock.json && rm -rf node_modules && yarn install --force"
   },
   "dependencies": {
     "@houlagins/default-options": "1.0.2",
