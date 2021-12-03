@@ -1,7 +1,5 @@
 <template>
-  <div id="mapView">
-
-  </div>
+  <div id="mapView1"></div>
 </template>
 
 <script>
@@ -11,6 +9,7 @@ import MapView from '@arcgis/core/views/MapView';
 import Map from '@arcgis/core/Map';
 // import { load as projectionLoad, project } from "@arcgis/core/geometry/projection"
 import config from '@arcgis/core/config';
+import locator from '@arcgis/core/rest/locator';
 import MapImageLayer from '@arcgis/core/layers/MapImageLayer';
 import * as Intl from '@arcgis/core/intl';
 // import TileLayer from "@arcgis/core/layers/TileLayer"
@@ -41,15 +40,24 @@ export default {
   mounted,
 };
 
-function data() { return { map: undefined }; }
+function data() {
+  return { map: undefined };
+}
 
 const countries = new FeatureLayer({
   // This URL still doesn't work
-  url: 'https://geoportal.un.org/arcgis/home/webmap/viewer.html?useExisting=1&layers=ef3a590937a7496fa178bab3f564a4e2&layerId=0',
+  // url: 'https://geoportal.un.org/arcgis/home/webmap/viewer.html?useExisting=1&layers=ef3a590937a7496fa178bab3f564a4e2&layerId=0',
+  portalItem: {
+    id: '53a1e68de7e4499cad77c80daba46a94',
+  },
 });
 
 const worldImg = new TileLayer({
-  url: 'https://geoservices.un.org/arcgis/rest/services/ClearMap_WebDark/MapServer',
+  //   url: 'https://geoservices.un.org/arcgis/rest/services/ClearMap_WebDark/MapServer',
+  portalItem: {
+    // bottom layer in the group layer
+    id: '10df2279f9684e4a9f6a7f08febac2a9', // world imagery
+  },
 });
 
 worldImg.when(() => {
@@ -63,11 +71,15 @@ worldImg.when(() => {
 const countryGraphicsLayer = new GraphicsLayer({
   blendMode: 'destination-in',
   title    : 'layer',
-  effect   : 'bloom(200%)',
+  //   effect   : 'bloom(200%)',
 });
 
 const tileLayer = new TileLayer({
-  url: 'https://geoservices.un.org/arcgis/rest/services/ClearMap_WebDark/MapServer',
+  //   url: 'https://geoservices.un.org/arcgis/rest/services/ClearMap_WebDark/MapServer',
+  portalItem: {
+    // bottom layer in the group layer
+    id: '10df2279f9684e4a9f6a7f08febac2a9', // world imagery
+  },
 });
 
 tileLayer.when(() => {
@@ -84,34 +96,35 @@ const groupLayer = new GroupLayer({
 
 function created() {
   config.apiKey      = key;
-  config.locale      = 'ru';
+  config.locale      = 'ca';
   config.parseOnLoad = true;
   // config.assetsPath = 'https://cdn.jsdelivr.net/npm/@arcgis/core@4.20.2/assets/'
 
   Intl.setLocale('CA');
 
-  const baseTileLayer = (new MapImageLayer({ url: 'https://geoservices.un.org/arcgis/rest/services/ClearMap_WebDark/MapServer' }));
+  const baseTileLayer = new MapImageLayer({
+    url: 'https://geoservices.un.org/arcgis/rest/services/ClearMap_WebDark/MapServer',
+  });
 
   const basemap = new Basemap({
     baseLayers: [ baseTileLayer ],
     // baseLayers: [ new TileLayer({ url: "https://tiles.arcgis.com/
     // tiles/nGt4QxSblgDfeJn9/arcgis/rest/services/terrain_with_heavy_bathymetry/MapServer", }), ],
-
   });
 
   console.log(basemap);
   // this.map  = new Map({ basemap });
   this.map = new Map({
-    basemap,
+    // basemap,
     layers: [ worldImg, groupLayer ],
   });
 }
 
 function mounted() {
   globalProps.mapView = new MapView({
-    container  : 'mapView',
+    container  : 'mapView1',
     map        : this.map,
-    zoom       : 10,
+    zoom       : 6,
     center     : [ 2, 46 ],
     popup      : null,
     constraints: {
@@ -125,7 +138,7 @@ function mounted() {
   console.log('this.mapView', globalProps.mapView.when);
 
   globalProps.mapView.when(() => {
-    globalProps.mapView.graphics.add(getCircleMarker(100, globalProps.mapView));
+    // globalProps.mapView.graphics.add(getCircleMarker(100, globalProps.mapView));
     const query = {
       geometry      : globalProps.mapView.center,
       returnGeometry: true,
@@ -133,6 +146,15 @@ function mounted() {
     };
     highlightCountry(query, globalProps.mapView.center);
   });
+
+  //   view.when(() => {
+  //     const query = {
+  //       geometry      : view.center,
+  //       returnGeometry: true,
+  //       outFields     : [ '*' ],
+  //     };
+  //     highlightCountry(query, view.center);
+  //   });
 
   globalProps.mapView.on('click', async (event) => {
     const query = {
@@ -142,6 +164,46 @@ function mounted() {
     };
     highlightCountry(query, query.geometry);
   });
+}
+
+const locatorUrl = 'http://geocode-api.arcgis.com/arcgis/rest/services/World/GeocodeServer';
+
+// Find places and add them to the map
+function findPlaces(category, pt) {
+  locator.addressToLocations(locatorUrl, {
+    location    : pt,
+    categories  : [ category ],
+    maxLocations: 25,
+    outFields   : [ 'Place_addr', 'PlaceName' ],
+  })
+
+    .then((results) => {
+      view.popup.close();
+      view.graphics.removeAll();
+
+      results.forEach((result) => {
+        view.graphics.add(
+          new Graphic({
+            attributes: result.attributes,  // Data attributes returned
+            geometry  : result.location, // Point returned
+            symbol    : {
+              type   : 'simple-marker',
+              color  : '#000000',
+              size   : '12px',
+              outline: {
+                color: '#ffffff',
+                width: '2px',
+              },
+            },
+
+            popupTemplate: {
+              title  : '{PlaceName}', // Data attribute names
+              content: '{Place_addr}',
+            },
+          }),
+        );
+      });
+    });
 }
 
 async function highlightCountry(query, zoomGeometry) {
@@ -164,26 +226,23 @@ async function highlightCountry(query, zoomGeometry) {
         target: zoomGeometry,
         extent: feature.geometry.extent.clone().expand(1.8),
       },
-      { duration: 500 },
+      { duration: 1000 },
     );
-    worldImg.effect    = 'blur(8px) brightness(1.2) grayscale(0.8)';
-    groupLayer.effect  = 'brightness(2.5) drop-shadow(0, 0px, 3px)';
+    worldImg.effect    = 'blur(8px) brightness(1) grayscale(0.8)';
+    groupLayer.effect  = 'brightness(1.2) drop-shadow(0, 0px, 3px)';
     groupLayer.opacity = 1;
-  } else { // did not click on a country. remove effects
+  } else {
+    // did not click on a country. remove effects
     worldImg.effect   = null;
     groupLayer.effect = null;
   }
 }
-
 </script>
 <style scoped>
- #mapView {
-        padding: 0;
-        margin: 0;
-        height: 100%;
-        max-height: 450px;
-        width: 50%;
-        background-color: #232a35;
-        /* background: radial-gradient(#91c7e3, #3d93bf); */
-      }
+#mapView1 {
+  padding: 0;
+  margin: 0;
+  height: 100%;
+  width: 100%;
+}
 </style>
