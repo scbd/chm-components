@@ -29,6 +29,7 @@ import GroupLayer from '@arcgis/core/layers/GroupLayer';
 // import watchUtils from '@arcgis/core/watchUtils'
 
 import getCircleMarker from './circle-markers';
+import countryCodes from '../assets/country-codes.json';
 
 const key         = 'AAPK646a81c542644891abe68e9b21413e7d9MDczfDifZi8IyvG6QcxfFuNqSRmlqH95-PH9mBOSEf4a4eE2Nwt8wIRsBLWd4NO';
 const globalProps = {};
@@ -121,11 +122,19 @@ function created() {
 }
 
 function mounted() {
-  globalProps.mapView = new MapView({
+  const countryList = countryCodes.ref_country_codes;
+
+  const params      = (new URL(document.location)).searchParams;
+  const countryCode = params.get('country') || 'CA';
+
+  const findCountry = countryList.find((f) => f.alpha2 === countryCode) || { latitude: 60, longitude: -95 };
+
+  const { latitude, longitude } = findCountry;
+  globalProps.mapView           = new MapView({
     container  : 'mapView1',
     map        : this.map,
     zoom       : 6,
-    center     : [ 2, 46 ],
+    center     : [ longitude, latitude ],
     popup      : null,
     constraints: {
       snapToZoom: false,
@@ -141,6 +150,7 @@ function mounted() {
     // globalProps.mapView.graphics.add(getCircleMarker(100, globalProps.mapView));
     const query = {
       geometry      : globalProps.mapView.center,
+      // geometry      : globalProps.mapView.center,
       returnGeometry: true,
       outFields     : [ '*' ],
     };
@@ -157,6 +167,7 @@ function mounted() {
   //   });
 
   globalProps.mapView.on('click', async (event) => {
+    console.log(globalProps.mapView.toMap(event));
     const query = {
       geometry      : globalProps.mapView.toMap(event),
       returnGeometry: true,
