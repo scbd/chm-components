@@ -1,33 +1,21 @@
 <template>
-  <div id="mapView1"></div>
+  <div id="mapView"></div>
 </template>
 
 <script>
 import '@arcgis/core/assets/esri/themes/dark/main.css';
-// import WebMap from "@arcgis/core/WebMap"
 import MapView from '@arcgis/core/views/MapView';
 import Map from '@arcgis/core/Map';
-// import { load as projectionLoad, project } from "@arcgis/core/geometry/projection"
+import QueryTask from '@arcgis/core/tasks/QueryTask';
+import Query from '@arcgis/core/tasks/support/Query';
 import config from '@arcgis/core/config';
 import MapImageLayer from '@arcgis/core/layers/MapImageLayer';
 import * as Intl from '@arcgis/core/intl';
-// import TileLayer from "@arcgis/core/layers/TileLayer"
 import Basemap from '@arcgis/core/Basemap';
 import GraphicsLayer from '@arcgis/core/layers/GraphicsLayer';
 import FeatureLayer from '@arcgis/core/layers/FeatureLayer';
 import TileLayer from '@arcgis/core/layers/TileLayer';
 import GroupLayer from '@arcgis/core/layers/GroupLayer';
-// import Graphic from "@arcgis/core/Graphic";
-// import ElevationLayer from '@arcgis/core/layers/ElevationLayer'
-// import BaseElevationLayer from '@arcgis/core/layers/BaseElevationLayer'
-
-// import SpatialReference from '@arcgis/core/geometry/SpatialReference'
-// import Graphic from '@arcgis/core/Graphic'
-// import Point from '@arcgis/core/geometry/Point'
-// import Mesh from '@arcgis/core/geometry/Mesh'
-// import watchUtils from '@arcgis/core/watchUtils'
-
-// import getCircleMarker from './circle-markers';
 import countryCodes from '../assets/country-codes.json';
 
 const key         = 'AAPK646a81c542644891abe68e9b21413e7d9MDczfDifZi8IyvG6QcxfFuNqSRmlqH95-PH9mBOSEf4a4eE2Nwt8wIRsBLWd4NO';
@@ -45,16 +33,12 @@ function data() {
 }
 
 const countries = new FeatureLayer({
-  // This URL still doesn't work
-  // url: 'https://geoportal.un.org/arcgis/home/webmap/viewer.html?useExisting=1&
-  // layers=ef3a590937a7496fa178bab3f564a4e2&layerId=0',
   portalItem: {
     id: '53a1e68de7e4499cad77c80daba46a94',
   },
 });
 
 const worldImg = new TileLayer({
-  //   url: 'https://geoservices.un.org/arcgis/rest/services/ClearMap_WebDark/MapServer',
   portalItem: {
     // bottom layer in the group layer
     id: '10df2279f9684e4a9f6a7f08febac2a9', // world imagery
@@ -72,11 +56,9 @@ worldImg.when(() => {
 const countryGraphicsLayer = new GraphicsLayer({
   blendMode: 'destination-in',
   title    : 'layer',
-  //   effect   : 'bloom(200%)',
 });
 
 const tileLayer = new TileLayer({
-  //   url: 'https://geoservices.un.org/arcgis/rest/services/ClearMap_WebDark/MapServer',
   portalItem: {
     // bottom layer in the group layer
     id: '10df2279f9684e4a9f6a7f08febac2a9', // world imagery
@@ -99,7 +81,6 @@ function created() {
   config.apiKey      = key;
   config.locale      = 'ca';
   config.parseOnLoad = true;
-  // config.assetsPath = 'https://cdn.jsdelivr.net/npm/@arcgis/core@4.20.2/assets/'
 
   Intl.setLocale('CA');
 
@@ -109,31 +90,27 @@ function created() {
 
   const basemap = new Basemap({
     baseLayers: [ baseTileLayer ],
-    // baseLayers: [ new TileLayer({ url: "https://tiles.arcgis.com/
-    // tiles/nGt4QxSblgDfeJn9/arcgis/rest/services/terrain_with_heavy_bathymetry/MapServer", }), ],
   });
 
   console.log(basemap);
-  // this.map  = new Map({ basemap });
   this.map = new Map({
-    // basemap,
     layers: [ worldImg, groupLayer ],
   });
 }
 
 function mounted() {
   const countryList = countryCodes.ref_country_codes;
-
-  const params      = (new URL(document.location)).searchParams;
+  const url         = new URL(window.location);
+  const params      = url.searchParams;
   const countryCode = params.get('country') || 'CA';
 
   const findCountry = countryList.find((f) => f.alpha2 === countryCode) || { latitude: 60, longitude: -95 };
 
   const { latitude, longitude } = findCountry;
   globalProps.mapView           = new MapView({
-    container  : 'mapView1',
+    container  : 'mapView',
     map        : this.map,
-    zoom       : 6,
+    zoom       : 12,
     center     : [ longitude, latitude ],
     popup      : null,
     constraints: {
@@ -147,37 +124,40 @@ function mounted() {
   console.log('this.mapView', globalProps.mapView.when);
 
   globalProps.mapView.when(() => {
-    // globalProps.mapView.graphics.add(getCircleMarker(100, globalProps.mapView));
     const query = {
       geometry      : globalProps.mapView.center,
-      // geometry      : globalProps.mapView.center,
       returnGeometry: true,
       outFields     : [ '*' ],
     };
     highlightCountry(query, globalProps.mapView.center);
   });
 
-  //   view.when(() => {
-  //     const query = {
-  //       geometry      : view.center,
-  //       returnGeometry: true,
-  //       outFields     : [ '*' ],
-  //     };
-  //     highlightCountry(query, view.center);
-  //   });
+  const queryTask = new QueryTask({
+    url:
+  'https://services.arcgis.com/P3ePLMYs2RVChkJx/arcgis/rest/services/World_Countries_(Generalized)/FeatureServer/0',
+  });
+
+  const queryMap          = new Query();
+  queryMap.returnGeometry = false;
+  queryMap.outFields      = [ 'COUNTRY' ];
 
   globalProps.mapView.on('click', async (event) => {
-    console.log(globalProps.mapView.toMap(event));
-    const query = {
+    const query       = {
       geometry      : globalProps.mapView.toMap(event),
       returnGeometry: true,
       outFields     : [ '*' ],
     };
+    queryMap.geometry = event.mapPoint;
+    queryTask.execute(queryMap).then((results) => {
+      const selectedCountryName = results.features[0].attributes.COUNTRY;
+      const countryDetails      = countryList.find((f) => String(f.country).toLowerCase() === String(selectedCountryName).toLowerCase());
+      params.set('country', countryDetails.alpha2);
+      window.history.pushState({}, '', url);
+    });
+
     highlightCountry(query, query.geometry);
   });
 }
-
-// const locatorUrl = 'http://geocode-api.arcgis.com/arcgis/rest/services/World/GeocodeServer';
 
 async function highlightCountry(query, zoomGeometry) {
   const symbol = {
@@ -199,7 +179,7 @@ async function highlightCountry(query, zoomGeometry) {
         target: zoomGeometry,
         extent: feature.geometry.extent.clone().expand(1.8),
       },
-      { duration: 1000 },
+      { duration: 400 },
     );
     worldImg.effect    = 'blur(8px) brightness(1) grayscale(0.8)';
     groupLayer.effect  = 'brightness(1.2) drop-shadow(0, 0px, 3px)';
@@ -212,7 +192,7 @@ async function highlightCountry(query, zoomGeometry) {
 }
 </script>
 <style scoped>
-#mapView1 {
+#mapView {
   padding: 0;
   margin: 0;
   height: 100%;
