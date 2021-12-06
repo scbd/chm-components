@@ -9,7 +9,6 @@ import MapView from '@arcgis/core/views/MapView';
 import Map from '@arcgis/core/Map';
 // import { load as projectionLoad, project } from "@arcgis/core/geometry/projection"
 import config from '@arcgis/core/config';
-import locator from '@arcgis/core/rest/locator';
 import MapImageLayer from '@arcgis/core/layers/MapImageLayer';
 import * as Intl from '@arcgis/core/intl';
 // import TileLayer from "@arcgis/core/layers/TileLayer"
@@ -28,7 +27,7 @@ import GroupLayer from '@arcgis/core/layers/GroupLayer';
 // import Mesh from '@arcgis/core/geometry/Mesh'
 // import watchUtils from '@arcgis/core/watchUtils'
 
-import getCircleMarker from './circle-markers';
+// import getCircleMarker from './circle-markers';
 import countryCodes from '../assets/country-codes.json';
 
 const key         = 'AAPK646a81c542644891abe68e9b21413e7d9MDczfDifZi8IyvG6QcxfFuNqSRmlqH95-PH9mBOSEf4a4eE2Nwt8wIRsBLWd4NO';
@@ -47,7 +46,8 @@ function data() {
 
 const countries = new FeatureLayer({
   // This URL still doesn't work
-  // url: 'https://geoportal.un.org/arcgis/home/webmap/viewer.html?useExisting=1&layers=ef3a590937a7496fa178bab3f564a4e2&layerId=0',
+  // url: 'https://geoportal.un.org/arcgis/home/webmap/viewer.html?useExisting=1&
+  // layers=ef3a590937a7496fa178bab3f564a4e2&layerId=0',
   portalItem: {
     id: '53a1e68de7e4499cad77c80daba46a94',
   },
@@ -177,45 +177,7 @@ function mounted() {
   });
 }
 
-const locatorUrl = 'http://geocode-api.arcgis.com/arcgis/rest/services/World/GeocodeServer';
-
-// Find places and add them to the map
-function findPlaces(category, pt) {
-  locator.addressToLocations(locatorUrl, {
-    location    : pt,
-    categories  : [ category ],
-    maxLocations: 25,
-    outFields   : [ 'Place_addr', 'PlaceName' ],
-  })
-
-    .then((results) => {
-      view.popup.close();
-      view.graphics.removeAll();
-
-      results.forEach((result) => {
-        view.graphics.add(
-          new Graphic({
-            attributes: result.attributes,  // Data attributes returned
-            geometry  : result.location, // Point returned
-            symbol    : {
-              type   : 'simple-marker',
-              color  : '#000000',
-              size   : '12px',
-              outline: {
-                color: '#ffffff',
-                width: '2px',
-              },
-            },
-
-            popupTemplate: {
-              title  : '{PlaceName}', // Data attribute names
-              content: '{Place_addr}',
-            },
-          }),
-        );
-      });
-    });
-}
+// const locatorUrl = 'http://geocode-api.arcgis.com/arcgis/rest/services/World/GeocodeServer';
 
 async function highlightCountry(query, zoomGeometry) {
   const symbol = {
