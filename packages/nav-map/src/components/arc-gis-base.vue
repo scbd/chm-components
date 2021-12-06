@@ -9,9 +9,6 @@ import Map from '@arcgis/core/Map';
 import QueryTask from '@arcgis/core/tasks/QueryTask';
 import Query from '@arcgis/core/tasks/support/Query';
 import config from '@arcgis/core/config';
-import MapImageLayer from '@arcgis/core/layers/MapImageLayer';
-import * as Intl from '@arcgis/core/intl';
-import Basemap from '@arcgis/core/Basemap';
 import GraphicsLayer from '@arcgis/core/layers/GraphicsLayer';
 import FeatureLayer from '@arcgis/core/layers/FeatureLayer';
 import TileLayer from '@arcgis/core/layers/TileLayer';
@@ -82,17 +79,6 @@ function created() {
   config.locale      = 'ca';
   config.parseOnLoad = true;
 
-  Intl.setLocale('CA');
-
-  const baseTileLayer = new MapImageLayer({
-    url: 'https://geoservices.un.org/arcgis/rest/services/ClearMap_WebDark/MapServer',
-  });
-
-  const basemap = new Basemap({
-    baseLayers: [ baseTileLayer ],
-  });
-
-  console.log(basemap);
   this.map = new Map({
     layers: [ worldImg, groupLayer ],
   });
@@ -110,7 +96,7 @@ function mounted() {
   globalProps.mapView           = new MapView({
     container  : 'mapView',
     map        : this.map,
-    zoom       : 12,
+    zoom       : 6,
     center     : [ longitude, latitude ],
     popup      : null,
     constraints: {
@@ -118,10 +104,6 @@ function mounted() {
       minScale  : 147914381,
     },
   });
-
-  Intl.setLocale('ca');
-
-  console.log('this.mapView', globalProps.mapView.when);
 
   globalProps.mapView.when(() => {
     const query = {
