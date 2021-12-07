@@ -10,6 +10,14 @@
   "workspaces": {
     "packages": [
       "packages/*"
+    ],
+    "nohoist": [
+      "**/@houlagins/dist-builder",
+      "**/fmin",
+      "**/@scbd/www-css",
+      "**/@chm/cached-apis",
+      "**/vite",
+      "**/@vitejs/plugin-vue"
     ]
   },
   "repository": "git+https://github.com/scbd/chm-components.git",
