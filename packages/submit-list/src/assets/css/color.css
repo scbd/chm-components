@@ -1,150 +1,142 @@
 /* colors */
-.color-red{
-    color:#C7532C!important;
+.color-red {
+  color: #c7532c !important;
 }
-.color-orange{
-    color:#fa6938!important;
+.color-orange {
+  color: #fa6938 !important;
 }
-.color-blue{
-    color:#428bca!important;
+.color-blue {
+  color: #428bca !important;
 }
-.color-green{
-    color:#1FA65D!important;
+.color-green {
+  color: #1fa65d !important;
 }
-.color-published-green{
-    color:#5cb85c!important;
+.color-published-green {
+  color: #5cb85c !important;
 }
-.color-grey{
-    color:#555;
+.color-grey {
+  color: #555;
 }
-.color-cbdgreen{
-    color:#009b48!important;
-}
-
-.color-darkgrey{
-    color:#333;
-}
-.color-medgrey{
-    color:#666;
-}
-.color-medgrey2{
-    color:#777;
-}
-.color-medgrey1{
-    color:#888;
-}
-.color-litegrey{
-    color:#999;
-}
-.color-black{
-    color:#111;
-}
-.color-white{
-    color:#FFF;
-}
-.color-yellow{
-    color:#FFD801;
+.color-cbdgreen {
+  color: #009b48 !important;
 }
 
-.bg-white-to-red{
-    background-color:#fff;
-    -webkit-transition: #C7532C 0.4s ease;
-    -moz-transition: #C7532C 0.4s ease;
-    -o-transition: #C7532C 0.4s ease;
-    transition: #C7532C 0.4s ease;
+.color-darkgrey {
+  color: #333;
+}
+.color-medgrey {
+  color: #666;
+}
+.color-medgrey2 {
+  color: #777;
+}
+.color-medgrey1 {
+  color: #888;
+}
+.color-litegrey {
+  color: #999;
+}
+.color-black {
+  color: #111;
+}
+.color-white {
+  color: #fff;
+}
+.color-yellow {
+  color: #ffd801;
 }
 
-.bg-yellow{
-    background-color:#FFD801!important;
-    color:#fff;
+.bg-white-to-red {
+  background-color: #fff;
+  -webkit-transition: #c7532c 0.4s ease;
+  -moz-transition: #c7532c 0.4s ease;
+  -o-transition: #c7532c 0.4s ease;
+  transition: #c7532c 0.4s ease;
 }
 
-.bg-cbdgreen{
-    background-color:#009b48!important;
-    color:#fff!important;
+.bg-yellow {
+  background-color: #ffd801 !important;
+  color: #fff;
 }
 
-.highlight{
-    background-color:#FCEBBD!important;
-    color:#000;
-    font-weight:bold;
-
+.bg-cbdgreen {
+  background-color: #009b48 !important;
+  color: #fff !important;
 }
 
-
-.bg-none{
-    background-color:inherit!important;
+.highlight {
+  background-color: #fcebbd !important;
+  color: #000;
+  font-weight: bold;
 }
 
-.bg-orange{
-    background-color:#fa6938!important;
-    color:white!important;
-}
-.bg-white{
-    background-color:#FFF!important;
-    color:#555!important;
-}
-.bg-grey{
-    background-color:#EEE!important;
-    color:#555;
-}
-.bg-red{
-    background-color:#C7532C!important;
-    color:white;
+.bg-none {
+  background-color: inherit !important;
 }
 
-.bg-blue{
-    background-color:#428bca!important;
-    color:white!important;
+.bg-orange {
+  background-color: #fa6938 !important;
+  color: white !important;
+}
+.bg-white {
+  background-color: #fff !important;
+  color: #555 !important;
+}
+.bg-grey {
+  background-color: #eee !important;
+  color: #555;
+}
+.bg-red {
+  background-color: #c7532c !important;
+  color: white;
 }
 
-.bg-liteblue{
-    background-color:#E1F1F9!important;
+.bg-blue {
+  background-color: #428bca !important;
+  color: white !important;
 }
 
-.bg-green{
-    background-color:#1FA65D!important;
+.bg-liteblue {
+  background-color: #e1f1f9 !important;
 }
 
-.bg-black{
-    background-color:#111!important;
-    color:white!important;
+.bg-green {
+  background-color: #1fa65d !important;
 }
 
-
-bg-litegrey2{
-    background-color:#ccc!important;
-
-}
-bg-litegrey1{
-    background-color:#ddd!important;
-
+.bg-black {
+  background-color: #111 !important;
+  color: white !important;
 }
 
-.bg-litegrey{
-    background-color:#EEE!important;
-
+bg-litegrey2 {
+  background-color: #ccc !important;
+}
+bg-litegrey1 {
+  background-color: #ddd !important;
 }
 
-.bg-darkgrey{
-    background-color:#666!important;
-
+.bg-litegrey {
+  background-color: #eee !important;
 }
 
-.bg-medgrey{
-    background-color:#999!important;
+.bg-darkgrey {
+  background-color: #666 !important;
 }
 
-.bg-published{
-    background-color:#1FA65D!important;
-    color:white!important;
-}
-.bg-draft{
-    background-color:#bbb!important;
-    color:white!important;
-}
-.bg-request{
-    background-color:#C7532C!important;
-    color:white!important;
+.bg-medgrey {
+  background-color: #999 !important;
 }
 
+.bg-published {
+  background-color: #1fa65d !important;
+  color: white !important;
+}
+.bg-draft {
+  background-color: #bbb !important;
+  color: white !important;
+}
+.bg-request {
+  background-color: #c7532c !important;
+  color: white !important;
+}

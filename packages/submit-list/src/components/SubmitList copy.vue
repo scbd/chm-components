@@ -1,6 +1,10 @@
 <template>
   <div class="container">
-    <h3 class="color-blue" role="button" @click="showNationalRecords = !showNationalRecords">
+    <h3
+      class="color-blue"
+      role="button"
+      @click="showNationalRecords = !showNationalRecords"
+    >
       <i
         :class="{
           'fa fa-chevron-circle-down': showNationalRecords,
@@ -338,7 +342,11 @@
       </div>
     </div>
     <hr style="position: absolute; width: 100%; left: 0" />
-    <h3 class="color-orange" role="button" @click="showRefRecords = !showRefRecords">
+    <h3
+      class="color-orange"
+      role="button"
+      @click="showRefRecords = !showRefRecords"
+    >
       <!-- ng-class="{'fa fa-chevron-circle-down': showNationalrecords, 'fa fa-chevron-circle-up':!showNationalrecords}" -->
       <i
         :class="{
@@ -678,15 +686,14 @@
 
 <script>
 export default {
-  name: 'SubmitList',
+  name: "SubmitList",
   data() {
     return {
       showNationalRecords: false,
-      showRefRecords     : false,
+      showRefRecords: false,
     };
   },
 };
 </script>
 
-<style>
-</style>
+<style></style>

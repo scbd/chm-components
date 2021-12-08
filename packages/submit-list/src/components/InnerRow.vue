@@ -50,10 +50,10 @@
 
 <script>
 export default {
-  name : 'InnerRow',
+  name: "InnerRow",
   props: {
     details: {
-      type   : Object,
+      type: Object,
       default: () => {},
     },
     bottomBorder: {

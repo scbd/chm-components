@@ -32,12 +32,12 @@
 </template>
 
 <script>
-import CardButtons from './CardButtons.vue';
-import CardHeader from './CardHeader.vue';
-import InnerRow from './InnerRow.vue';
+import CardButtons from "./CardButtons.vue";
+import CardHeader from "./CardHeader.vue";
+import InnerRow from "./InnerRow.vue";
 
 export default {
-  name      : 'Records',
+  name: "Records",
   components: {
     CardButtons,
     CardHeader,
@@ -45,12 +45,12 @@ export default {
   },
   props: {
     rows: {
-      type   : Object,
+      type: Object,
       default: () => {},
     },
     type: {
-      type   : String,
-      default: '',
+      type: String,
+      default: "",
     },
   },
   computed: {
@@ -59,23 +59,23 @@ export default {
     },
   },
   setup() {
-    const colorClass    = {
-      national : 'color-blue',
-      reference: 'color-orange',
-      SCBD     : 'color-black',
+    const colorClass = {
+      national: "color-blue",
+      reference: "color-orange",
+      SCBD: "color-black",
     };
     const subTypesNames = {
-      strategiesAndReports      : 'National Strategies and Reports',
-      accessAndBenefitSharing   : 'Access and Benefit-Sharing (Nagoya Protocol)',
-      biosafetyClearingHouse    : 'Biosafety Clearing-House (BCH)',
-      capacityBuildingRecords   : 'Capacity-Building Records',
-      bioBridgeInitiativeRecords: 'Bio-Bridge Initiative Records',
-      events                    : 'Events',
-      organizations             : 'Organizations',
-      UNDBRecords               : 'UNDB Records',
-      virtualLibraryRecords     : 'Virtual Library Records',
-      SCBDRecords               : 'SCBD records',
-      lifeWeb                   : 'LifeWeb',
+      strategiesAndReports: "National Strategies and Reports",
+      accessAndBenefitSharing: "Access and Benefit-Sharing (Nagoya Protocol)",
+      biosafetyClearingHouse: "Biosafety Clearing-House (BCH)",
+      capacityBuildingRecords: "Capacity-Building Records",
+      bioBridgeInitiativeRecords: "Bio-Bridge Initiative Records",
+      events: "Events",
+      organizations: "Organizations",
+      UNDBRecords: "UNDB Records",
+      virtualLibraryRecords: "Virtual Library Records",
+      SCBDRecords: "SCBD records",
+      lifeWeb: "LifeWeb",
     };
     return {
       colorClass,
@@ -97,5 +97,4 @@ function capitalizeFirstLetter(string) {
 }
 </script>
 
-<style>
-</style>
+<style></style>

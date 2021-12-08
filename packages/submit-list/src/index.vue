@@ -3,10 +3,10 @@
 </template>
 
 <script>
-import SubmitList from './components/SubmitList.vue';
+import SubmitList from "./components/SubmitList.vue";
 
 export default {
-  name      : 'App',
+  name: "App",
   components: {
     SubmitList,
   },
@@ -22,5 +22,4 @@ export default {
   color: #2c3e50;
   margin-top: 60px;
 }
-@import "./assets/css/styles.css";
 </style>
