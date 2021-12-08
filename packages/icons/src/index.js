@@ -1,7 +1,7 @@
 import   Icons        from './components/index.vue'
 import   IconComp     from './components/Icon.vue'
 
-const NAME =  'AAIcons'
+const NAME =  'CHM-Icons'
 
 // #region snippet
 export const iconNames = [ 'cancel', 'close', 'edit', 'question-circle', 'earth', 'trash-o', 'file', 'cloud-upload', 'chevron-down', 'search', 'filter' ]
@@ -13,7 +13,7 @@ export function install(Vue){
   install.installed = true
   
   Vue.component(NAME, Icons)
-  Vue.component('AA-Icon', IconComp)
+  Vue.component('CHM-Icon', IconComp)
 }
 
 export const plugin = { install, NAME }
