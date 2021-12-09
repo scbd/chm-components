@@ -1,5 +1,6 @@
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
+import { terser } from 'rollup-plugin-terser';
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -14,13 +15,33 @@ export default defineConfig({
       // make sure to externalize deps that shouldn't be bundled
       // into your library
       external: ['vue'],
-      output: {
-        // Provide global variables to use in the UMD build
-        // for externalized deps
-        globals: {
-          vue: 'Vue'
-        }
-      }
+      input: 'src/index.js',
+      output: [
+        {
+          dir: 'dist',
+          format: 'cjs',
+          exports: 'named',
+          globals: {
+            vue: 'Vue'
+          },
+        },
+        {
+          dir: 'dist',
+          format: 'esm',
+          exports: 'named',
+          globals: {
+            vue: 'Vue'
+          },
+        },
+        {
+          dir: 'dist',
+          format: 'umd',
+          exports: 'named',
+           globals: {
+            vue: 'Vue'
+          },
+        }      
+      ]
     }
   }
 })
