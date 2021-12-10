@@ -6,7 +6,7 @@
     "build": "vite build",
     "preview": "vite preview",
     "minified": "vite build --mode minified",
-    "unminified": "vite build --mode unminified",
+    "unminified": "vite build --mode unminified"
   },
   "dependencies": {
     "vue": "3.2.23",
