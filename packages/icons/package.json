@@ -4,7 +4,11 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "minified": "vite build --mode minified",
+    "unminified": "vite build --mode unminified",
+    "build:dev": "vite build --mode staging",
+    "build:prod": "APP_ENV=production vite build"
   },
   "dependencies": {
     "vue": "3.2.23",
