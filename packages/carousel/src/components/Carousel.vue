@@ -23,16 +23,20 @@
           :class="{ active: index == selectedSlide }"
         >
           <img
-            :src="getImgUrl(banner.image)"
+            :src="banner.image"
             height="400"
             width="800"
             class="d-block w-100"
             alt="..."
           />
           <div class="carousel-caption d-none d-md-block">
-            <h5>{{banner.title}}</h5>
-            <p>{{banner.description}}</p>
-            <a :href="banner.url" type="button" class="btn btn-outline-success btn-sm">
+            <h5>{{ banner.title }}</h5>
+            <p>{{ banner.description }}</p>
+            <a
+              :href="banner.url"
+              type="button"
+              class="btn btn-outline-success btn-sm"
+            >
               READ MORE >>
             </a>
           </div>
@@ -69,44 +73,12 @@
 </template>
 
 <script>
+import carouselApi from "../api/carousel-data";
 export default {
   name: "Carousel",
   data() {
     return {
-    //   banners: [
-    //     "Gau_female",
-    //     "hello3",
-    //     "hello2",
-    //     "Gau_female",
-    //     "hello3",
-    //     "hello2",
-    //   ],
-      banners: [
-        {
-          image: "Gau_female",
-          url: "https://demo.test.chm-cbd.net/news/new-species-banded-iguana-discovered-island-gau",
-          title:
-            "A new species of banded iguana is discovered on the island of Gau",
-          description:
-            "Researchers from the U.S. Geological Survey, Taronga Conservation Society Australia, The National Trust of Fiji and NatureFiji-MareqetiViti have discovered a new species of banded iguana…",
-        },
-         {
-          image: "hello3",
-          url: "https://demo.test.chm-cbd.net/news/new-species-banded-iguana-discovered-island-gau",
-          title:
-            "A new species of banded iguana is discovered on the island of Gau",
-          description:
-            "Researchers from the U.S. Geological Survey, Taronga Conservation Society Australia, The National Trust of Fiji and NatureFiji-MareqetiViti have discovered a new species of banded iguana…",
-        },
-         {
-          image: "hello2",
-          url: "https://demo.test.chm-cbd.net/news/new-species-banded-iguana-discovered-island-gau",
-          title:
-            "A new species of banded iguana is discovered on the island of Gau",
-          description:
-            "Researchers from the U.S. Geological Survey, Taronga Conservation Society Australia, The National Trust of Fiji and NatureFiji-MareqetiViti have discovered a new species of banded iguana…",
-        },
-      ],
+      banners: [],
       selectedSlide: 0,
     };
   },
@@ -115,17 +87,27 @@ export default {
       return this.banners.length;
     },
   },
+  mounted,
   methods: {
-    getImgUrl(pet) {
-      var images = require.context("../assets/", false, /\.jpg$/);
-      return images("./" + pet + ".jpg");
-    },
     onNext,
     onPrevious,
     setSlide,
     onIndicatorsClick,
   },
 };
+
+async function mounted() {
+  const data = await carouselApi.getCarouselData();
+  this.banners = data.map(element => {
+    return { 
+      id: element.uuid.length ? element.uuid[0].value : "",
+      title: element.name.length ? element.name[0].value : "",
+      url: element.field_read_more.length ? element.field_read_more[0].uri : "",
+      image: element.field_media_image.length ? element.field_media_image[0].url : "",
+      description: element.field_description.length ? element.field_description[0].value : "",
+    }
+  });
+}
 
 function onIndicatorsClick(index) {
   this.setSlide(index);
