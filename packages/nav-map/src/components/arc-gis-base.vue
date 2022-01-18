@@ -215,13 +215,13 @@ async function highlightCountry(query, zoomGeometry) {
     feature.symbol = symbol;
     countryGraphicsLayer.graphics.add(feature);
     // zoom to the highlighted country
-    // globalProps.mapView.goTo(
-    //   {
-    //     target: zoomGeometry,
-    //     extent: feature.geometry.extent.clone().expand(1.8),
-    //   },
-    //   { duration: 400 },
-    // );
+    globalProps.mapView.goTo(
+      {
+        target: zoomGeometry,
+        extent: feature.geometry.extent.clone().expand(1.8),
+      },
+      { duration: 400 },
+    );
     worldImg.effect    = 'blur(8px) brightness(1) grayscale(0.8)';
     groupLayer.effect  = 'brightness(1.2) drop-shadow(0, 0px, 3px)';
     groupLayer.opacity = 1;
