@@ -2,7 +2,12 @@
   <div id="mapView">
     <div id="infoDiv">
       <!-- <span id="title"></span> -->
-      <img src="../assets/Flag_of_Europe.png" alt="European union" width="120" height="80">
+      <img
+        src="../assets/Flag_of_Europe.png"
+        alt="European union"
+        width="120"
+        height="80"
+      />
       <!-- <div id="colorSliderElement"></div> -->
     </div>
     <!-- <div id="infoDiv">
@@ -23,7 +28,7 @@ import GraphicsLayer from '@arcgis/core/layers/GraphicsLayer';
 import FeatureLayer from '@arcgis/core/layers/FeatureLayer';
 import TileLayer from '@arcgis/core/layers/TileLayer';
 import GroupLayer from '@arcgis/core/layers/GroupLayer';
-import Extent from '@arcgis/core/geometry/Extent';
+// import Extent from '@arcgis/core/geometry/Extent';
 import countryCodes from '../assets/country-codes.json';
 
 const key         = 'AAPK646a81c542644891abe68e9b21413e7d9MDczfDifZi8IyvG6QcxfFuNqSRmlqH95-PH9mBOSEf4a4eE2Nwt8wIRsBLWd4NO';
@@ -109,30 +114,31 @@ function mounted() {
 
   const { latitude, longitude } = findCountry;
   globalProps.mapView           = new MapView({
-    container: 'mapView',
-    map      : this.map,
-    // zoom       : 6,
-    // // center     : [ 15.0000,  64 ], // [ longitude, latitude ]
-    // popup      : null,
-    // constraints: {
-    //   snapToZoom: false,
-    //   minScale  : 147914381,
-    // },
+    container  : 'mapView',
+    map        : this.map,
+    zoom       : 6,
+    center     : [ longitude,  latitude ], // [ longitude, latitude ]
+    popup      : null,
+    constraints: {
+      snapToZoom: false,
+      minScale  : 147914381,
+    },
   });
 
-  // globalProps.mapView.center = [ 15.0000,  64 ];  // Sets the center point of the view at a specified lon/lat
+  // globalProps.mapView.center = [ 15.0000,  64 ];
+  // Sets the center point of the view at a specified lon/lat
   // globalProps.mapView.zoom   = 13;  // Sets the zoom LOD to 13
 
   // Set the extent on the view
-  globalProps.mapView.extent = new Extent({
-    xmin            : -9177882,
-    ymin            : 4246761,
-    xmax            : -9176720,
-    ymax            : 4247967,
-    spatialReference: {
-      wkid: 102100,
-    },
-  });
+  // globalProps.mapView.extent = new Extent({
+  //   xmin            : -9177882,
+  //   ymin            : 4246761,
+  //   xmax            : -9176720,
+  //   ymax            : 4247967,
+  //   spatialReference: {
+  //     wkid: 102100,
+  //   },
+  // });
 
   globalProps.mapView.when(() => {
     const query = {
@@ -194,13 +200,12 @@ function mounted() {
 }
 
 async function highlightCountry(query, zoomGeometry) {
+  console.log(zoomGeometry);
   const symbol = {
     type   : 'simple-fill',
     color  : 'rgba(255, 255, 255, 1)', // white
     outline: null,
   };
-  // eslint-disable-next-line no-debugger
-  debugger;
   const {
     features: [ feature ],
   } = await countries.queryFeatures(query);
