@@ -124,6 +124,7 @@ function onNextPageLoaded($event) {
   if (!this.server) {
     const {
       $page: { start },
+
     } = $event;
 
     this.page = start / 10 + 1;
