@@ -14,9 +14,10 @@ export default {
   *,
   *::before,
   *::after { box-sizing: border-box; }
+ // @import url('https://cdn.cbd.int/@scbd/www-css@1.0.2/dist/scss/bs-no-reboot.scss');
 
   #chm-submit-list {
-    @import '@scbd/www-css/dist/scss/import-no-reboot';
+    @import '@scbd/www-css/dist/scss/import';
     
     font-family: 'BenchNine', sans-serif;
     position: relative; width: 100%;
