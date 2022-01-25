@@ -1,23 +1,9 @@
-<template>
-  <div id="chm-submit-list">
-    <slot></slot>
-  </div>
-</template>
-
-<script>
-export default {
-  name: 'IdScopedScss'
-}
-</script>
-
-<style lang="scss" >
   *,
   *::before,
   *::after { box-sizing: border-box; }
- // @import url('https://cdn.cbd.int/@scbd/www-css@1.0.2/dist/scss/bs-no-reboot.scss');
 
   #chm-submit-list {
-    @import '@scbd/www-css/dist/scss/import';
+    @import '@scbd/www-css/dist/scss/import-no-reboot';
     
     font-family: 'BenchNine', sans-serif;
     position: relative; width: 100%;
@@ -790,4 +776,3 @@ export default {
         }
     }
   }
-</style>

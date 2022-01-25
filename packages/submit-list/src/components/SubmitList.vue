@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div  class="container">
     <div v-for="(row, index) of filterData" :key="index">
       <records :rows="row"></records>
     </div>

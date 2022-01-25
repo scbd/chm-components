@@ -1,18 +1,14 @@
 <template>
-  <StyleWrapper>
-    <ChmComponent></ChmComponent>
-  </StyleWrapper>
+    <ChmComponent id="chm-submit-list"></ChmComponent>
 </template>
 
 <script>
-import StyleWrapper from './components/IdScopedStyle/index.vue';
+import './style.scss'
 import ChmComponent from './components/SubmitList.vue';
 
 export default {
-  name: "App",
-  components: {
-    ChmComponent,  StyleWrapper
-  },
+  name      : 'App',
+  components: { ChmComponent },
 };
 </script>
 

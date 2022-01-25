@@ -1,12 +1,14 @@
-import { defineConfig } from 'vite'
-import { resolve } from 'path'
-import vue from '@vitejs/plugin-vue'
+import { defineConfig } from 'vite';
+import { resolve } from 'path';
+import vue from '@vitejs/plugin-vue';
+
 import consola from 'consola'
-// import Util  from '@houlagins/dist-builder'
+
+import Util  from '@houlagins/dist-builder'
 
 // const build = Util.rollupConfig()
 
-// consola.info(build)
+consola.info('Util',Util)
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [vue()],
@@ -27,6 +29,11 @@ export default defineConfig({
           vue: 'Vue'
         }
       }
-    }
-  }
+    },
+
+  },
+
 })
+
+
+
