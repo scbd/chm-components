@@ -1,36 +1,31 @@
-import { defineConfig } from 'vite'
-import vue from '@vitejs/plugin-vue'
-import minified from "./minified-build.js";
-import unminified from "./unminified-build.js";
+import  DistBuilder from '@scbd/dist-builder'
 
+const { viteConfig, getPackageVersion, external } = DistBuilder
+const debug   =  true
+const minify  =  true
+const globals = { vue: 'Vue', 'vue-i18n': 'VueI18n '}
 
-// https://vitejs.dev/config/
-export default defineConfig(({ command, mode }) => {
-  if (mode === 'minified') {
-    return {
-    plugins: [vue()],
-       build: minified
-      
-    }
-  } else if(mode === 'unminified') {
- return {
-    plugins: [vue()],
-       build: unminified
-      
-    }
-  } else {
-    return {
-      plugins: [vue()],
-      build: {
-      lib: {
-         entry:  'src/index.js',
-      name: 'CHM-icons',
-      fileName: (format) => `index.${format}.js`
-      },
-      rollupOptions: {
-       
-        }
-      }
-    }
-  }
-})
+const umd     = true
+const cjs     = true
+const legacy  = { umd, cjs }
+
+const browser = true
+const ssr     = true
+const modern  = { browser, ssr }
+
+const cdnUrl  = 'https://cdn.cbd.int'
+
+const  imports = {
+  'vue'               : `${cdnUrl}/vue@${getPackageVersion('vue')}/dist/vue.esm-browser.prod.js`,
+  'vue-i18n'          : `${cdnUrl}/vue-i18n@${getPackageVersion('vue-i18n')}/dist/vue-i18n.esm-browser.prod.js`
+}
+
+const widget     = false
+const testWidget = false
+
+export const distBuilderConfig = {
+  legacy, modern, widget, testWidget, cdnUrl, external, debug, minify, globals, imports
+}
+
+export default viteConfig(distBuilderConfig)
+

@@ -1,18 +1,19 @@
 {
   "name": "@chm/icons",
   "version": "0.0.1",
+  "license": "MIT",
+  "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
-    "preview": "vite preview",
-    "minified": "vite build --mode minified",
-    "unminified": "vite build --mode unminified"
+    "build": "dist-builder build",
+    "preview": "vite preview"
   },
   "dependencies": {
     "vue": "3.2.23",
     "vue-i18n": "9.2.0-beta.23"
   },
   "devDependencies": {
+    "@scbd/dist-builder": "^0.0.1-beta",
     "@vitejs/plugin-vue": "1.10.2",
     "vite": "2.7.0"
   }
