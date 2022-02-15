@@ -41,7 +41,7 @@
 </template>
 
 <script>
-import * as CachedApis from '../src/index.mjs'
+import * as CachedApis from './index.mjs'
 
 CachedApis.initializeApiStore()
 export default {

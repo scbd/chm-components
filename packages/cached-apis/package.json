@@ -1,69 +1,25 @@
 {
-  "name": "@action-agenda/cached-apis",
-  "type": "module",
-  "version": "1.0.12",
+  "name": "@chm/cached-apis",
+  "version": "0.0.0",
   "license": "MIT",
-  "author": "Secretariat of the Convention on Biological Diversity <it@cbd.int>",
-  "description": "Local caching and lookup of rarely changed SCBD apis",
-  "homepage": "https://scbd.github.io/action-agenda-components/components/cached-apis",
-  "readme": "https://scbd.github.io/action-agenda-components/components/cached-apis",
-  "umd": "dist/legacy/umd/index.umd.min.js",
-  "web": "dist/browser/index.min.js",
-  "main": "dist/ems/index.mjs",
-  "module": "dist/esm/index.mjs",
-  "source": "src/index.js",
-  "src": "src/index.js",
-  "unpkg": "dist/browser/index.min.js",
-  "jsdelivr": "dist/browser/index.min.js",
-  "jsnext:main": "dist/esm/index.min.mjs",
-  "files": [
-    "dist/*",
-    "src/*"
-  ],
-  "browser": {
-    "./umd": "dist/legacy/umd/index.umd.min.js",
-    "./browser": "dist/browser/index.min.js",
-    "./": "dist/browser/index.min.js"
-  },
-  "exports": {
-    ".": [
-      {
-        "import": "./dist/esm/index.mjs",
-        "require": "./dist/legacy/cjs/index.common.cjs",
-        "default": "./dist/esm/index.mjs"
-      },
-      "./dist/legacy/umd/index.umd.min.js"
-    ],
-    "./dist/": "./dist/",
-    "./src/": "./src/"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/scbd/action-agenda-components.git",
-    "directory": "packages/cached-apis"
-  },
+  "type": "module",
   "scripts": {
-    "serve": "vue-cli-service serve --open",
-    "build": "DEBUG=true dist-builder",
-    "test:e2e": "vue-cli-service test:e2e",
-    "test:e2e:headless": "vue-cli-service test:e2e --headless",
-    "lint": "vue-cli-service lint --ext .js,.mjs",
-    "link": "lerna link",
-    "release": "yarn publish --access=public --tag latest",
-    "clean-reinstall": "rm -f yarn.lock rm -f package-lock.json && rm -rf node_modules && yarn install --force"
+    "dev": "vite",
+    "build": "dist-builder build",
+    "preview": "vite preview"
   },
   "dependencies": {
-    "@houlagins/default-options": "1.0.2",
-    "@houlagins/load-http": "1.0.3",
     "@houlagins/locale": "1.0.0",
+    "axios": "^0.26.0",
     "localforage": "1.9.0",
     "lodash.isnil": "4.0.0",
-    "lodash.omitby": "4.6.0"
+    "lodash.omitby": "4.6.0",
+    "vue": "^3.2.25",
+    "vue-i18n": "9.2.0-beta.23"
   },
   "devDependencies": {
-    "@houlagins/dist-builder": "1.0.11",
-    "@vue/cli-plugin-e2e-cypress": "4.5.13",
-    "vue": "2.6.11",
-    "vue-template-compiler": "2.6.11"
+    "@scbd/dist-builder": "^0.0.1-beta",
+    "@vitejs/plugin-vue": "^2.2.0",
+    "vite": "^2.8.0"
   }
 }

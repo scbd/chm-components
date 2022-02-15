@@ -2,8 +2,9 @@ import   localForage   from 'localforage'
 import   isNil         from 'lodash.isnil'
 import   omitBy        from 'lodash.omitby'
 import { getUnLocale } from '@houlagins/locale'
-import { get$http    } from '@houlagins/load-http'
+// import { get$http    } from '@houlagins/load-http'
 import { getLString }  from './data/i18n.mjs'
+import axios from "axios"
 
 import   getDefaultOptions                                                              from './default-options.mjs'
 import { sourceMap, sdgsShort, orgTypeOther, actionCategories, isSameAsActionCat, documentStates, schemas } from './data/index.mjs'
@@ -177,17 +178,23 @@ const sanitizers = {
 
 async function getFromApi(apiName, orderBy='name'){
   try {
-    const   $http      = await get$http()
+    // const   $http      = await get$http()
     const   locale     = scbdCMSLocale() || getUnLocale()
     const { apisUrls } = options
 
     const retry   = { limit: 5, methods: [ 'get' ] }
     const timeout = 20000
 
-    const   data = (await (await $http.get(apisUrls[apiName], { timeout, retry })).json())
-      .map(sanitizers[apiName])
-      .filter(truthy => truthy)
-      .sort((a, b) => a[orderBy].localeCompare(b[orderBy]))
+    const result = await axios.get(apisUrls[apiName], { timeout, retry });
+    const data = result.data
+              .map(sanitizers[apiName])
+              .filter(truthy => truthy)
+              .sort((a, b) => a[orderBy].localeCompare(b[orderBy]))
+
+    // const   data = (await (await axios.get(apisUrls[apiName], { timeout, retry })).json())
+    //   .map(sanitizers[apiName])
+    //   .filter(truthy => truthy)
+    //   .sort((a, b) => a[orderBy].localeCompare(b[orderBy]))
 
     localForage.setItem(`${apiName}-${locale}`, data)
     return data
