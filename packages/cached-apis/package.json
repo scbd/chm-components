@@ -8,6 +8,39 @@
     "build": "dist-builder build",
     "preview": "vite preview"
   },
+  "main": "dist/es/index.min.js",
+  "web": "dist/browser/index.min.js",
+  "umd": "dist/umd/index.min.js",
+  "unpkg": "dist/browser/index.min.js",
+  "jsdelivr": "dist/browser/index.min.js",
+  "module": "dist/es/index.min.js",
+  "jsnext:main": "dist/es/index.min.js",
+  "src": "src/index.js",
+  "files": [
+    "dist/*",
+    "src/*"
+  ],
+  "browser": {
+    "./cjs": "dist/cjs/index.min.cjs",
+    "./mjs": "dist/mjs/index.min.mjs",
+    "./umd": "dist/umd/index.min.js",
+    "./browser": "dist/browser/index.min.js",
+    "./style": "dist/browser/style.css",
+    "./": "dist/browser/index.min.js"
+  },
+  "exports": {
+    ".": [
+      {
+        "import": "./dist/es/index.min.js",
+        "require": "./dist/cjs/index.cjs",
+        "style": "./dist/style.css",
+        "src": "./src",
+        "dist": "./dist",
+        "default": "./dist/umd/index.min.js"
+      },
+      "./dist/legacy/umd/index.umd.min.js"
+    ]
+  },
   "dependencies": {
     "@houlagins/locale": "1.0.0",
     "axios": "^0.26.0",
