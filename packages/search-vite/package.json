@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "@chm/cached-apis": "file:D:/zealous/scbd/chm-components_copy/packages/cached-apis",
+    "@chm/icons": "file:D:/zealous/scbd/chm-components-icons/packages/icons",
     "@houlagins/default-options": "~1.0.0",
     "@houlagins/load-http": "~1.0.1",
     "@houlagins/locale": "~1.0.0",
