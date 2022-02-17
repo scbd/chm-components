@@ -1,6 +1,6 @@
 <template >
-  <svg :class="{ [`aa-icon-${name}`]:true }" class="aa-icon" >
-    <use  v-bind="{ 'xlink:href': `#aa-icon-${name}` }"></use>
+  <svg :class="{ [`chm-icon-${name}`]:true }" class="chm-icon" >
+    <use  v-bind="{ 'xlink:href': `#chm-icon-${name}` }"></use>
   </svg>
 </template>
 <script>
@@ -12,7 +12,7 @@ export default {
 }
 </script>
 <style>
-.aa-icon {
+.chm-icon {
   display     : inline-block;
   width       : 1em;
   height      : 1em;
