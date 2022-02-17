@@ -3,22 +3,31 @@
     <div class="card-header">
       <div class="row">
         <div class="col-12 text-right">
-          <span class="text-muted">{{$t(schema)}}</span>
+          <span class="text-muted">{{ $t(schema) }}</span>
         </div>
       </div>
-
     </div>
     <!-- TAB 1 -->
-    <HorzCardAction  v-bind="$props" />
+    <HorzCardAction v-bind="$props" />
 
     <!-- FOOTER -->
     <div class="card-footer">
-
-      <div class="btn-group" role="group" aria-label="Card actions, view, edit publish, reject">
-        <a :href="url" target="_blank" rel="nopener noreferrer" type="button" class="btn btn-primary btn-sm">{{$t('View record')}}</a>
+      <div
+        class="btn-group"
+        role="group"
+        aria-label="Card actions, view, edit publish, reject"
+      >
+        <a
+          :href="url"
+          target="_blank"
+          rel="nopener noreferrer"
+          type="button"
+          class="btn btn-primary btn-sm"
+          >{{ $t("View record") }}</a
+        >
       </div>
 
-      <small class="text-muted float-right">{{dateTime|dateFormat}}</small>
+      <small class="text-muted float-right">{{ dateTime || dateFormat }}</small>
     </div>
   </div>
 </template>
@@ -26,23 +35,23 @@
 <script>
 import { lookUp } from '@chm/cached-apis';
 
-import   HorzCardAction   from './CardBody.vue';
-import   i18n              from '../../../locales/index';
+import HorzCardAction from './CardBody.vue';
+import i18n from '../../../locales/index';
 
 export default {
   name      : 'SearchListCard',
   components: { HorzCardAction },
   props     : {
-    id         : { type: String, required: true  },
-    name       : { type: String, required: true  },
+    id         : { type: String, required: true },
+    name       : { type: String, required: true },
     description: { type: String, required: false },
     dateTime   : { type: String, required: false },
     schema     : { type: String, required: false },
-    url        : { type: String, required: true  },
-    options    : { type: Object, required: true  }
+    url        : { type: String, required: true },
+    options    : { type: Object, required: true }
   },
   computed: { status },
-  methods : {  loadIcons },
+  methods : { loadIcons },
   filters : { dateFormat },
   data,
   created,
@@ -50,20 +59,28 @@ export default {
   i18n
 };
 
-function  data(){ return { icons: [] }; }
+function data(){
+  return { icons: [] };
+}
 
-async function updated(){ await this.loadIcons(); }
+async function updated(){
+  await this.loadIcons();
+}
 
 async function created(){
   await this.loadIcons();
 }
 
-function status(){ return this.meta.status; }
+function status(){
+  return this.meta.status;
+}
 
 function dateFormat(date){
   const d = new Date(date);
 
-  return `${d.getUTCFullYear()}-${monthFormat(d.getUTCMonth())}-${dayFormat(d.getUTCDate())}  `;
+  return `${d.getUTCFullYear()}-${monthFormat(d.getUTCMonth())}-${dayFormat(
+    d.getUTCDate()
+  )}  `;
 }
 
 function monthFormat(month){
@@ -75,13 +92,12 @@ function dayFormat(day){
   return day;
 }
 
-async function loadIcons(){
-  const iconData = [ ...(this.actionDetails || {}).actionCategories || [] ];
+function loadIcons(){
+  const iconData = [ ...((this.actionDetails || {}).actionCategories || []) ];
 
   if (!iconData.length) return;
   // eslint-disable-next-line no-restricted-syntax
-  for (const [ index,
-               { identifier }  = {} ] of iconData.entries())
+  for (const [ index, { identifier } = {} ] of iconData.entries())
     if (identifier){
       iconData[index] = lookUp('all', identifier, true);
       if (!iconData[index]){
@@ -90,13 +106,19 @@ async function loadIcons(){
         throw new Error('identifier not found');
       }
     }
-  
+
   this.icons = iconData;
 }
 </script>
 
 <style scoped>
-  .nav-item{ cursor:pointer; }
-  .tabs{max-width: 50%;}
-  .action-icon{max-width: 1.5em;}
+.nav-item {
+  cursor: pointer;
+}
+.tabs {
+  max-width: 50%;
+}
+.action-icon {
+  max-width: 1.5em;
+}
 </style>

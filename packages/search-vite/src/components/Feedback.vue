@@ -56,80 +56,81 @@ export default {
     total     : { type: Number, required: false },
     page      : { type: Number, required: false },
     totalPages: { type: Number, required: false },
-    loading   : { type: Boolean, required: false },
+    loading   : { type: Boolean, required: false }
   },
-  data() {
+  data(){
     return {
       isAscending   : false,
       isSortingApply: false,
       sortType      : 'updated',
       selectSortBy  : 'updated',
-      sortOrder     : 'desc',
+      sortOrder     : 'desc'
     };
   },
   methods: {
     sort,
-    removeSort,
+    removeSort
   },
   watch: {
-    selectSortBy(value) {
+    selectSortBy(value){
       this.sort(value);
     },
-    sortOrder(value) {
+    sortOrder(value){
       this.isAscending = value === 'asc';
       this.sort(null);
-    },
+    }
   },
   mounted,
-  i18n,
+  i18n
 };
 
-function mounted() {
+function mounted(){
   const url           = new URL(window.location).searchParams;
   const sortParam     = url.get('sort');
+
   this.isSortingApply = !!sortParam;
 
-  if (sortParam) {
-    if (sortParam.includes('updatedDate')) {
+  if (sortParam){
+    if (sortParam.includes('updatedDate'))
       this.selectSortBy = 'updated';
-    }
-    if (sortParam.includes('createdDate')) {
+    
+    if (sortParam.includes('createdDate'))
       this.selectSortBy = 'created';
-    }
-    if (sortParam.includes('title')) {
+    
+    if (sortParam.includes('title'))
       this.selectSortBy = 'name';
-    }
+    
 
-    if (sortParam.includes('asc')) {
+    if (sortParam.includes('asc'))
       this.sortOrder = 'asc';
-    }
-    if (sortParam.includes('desc')) {
+    
+    if (sortParam.includes('desc'))
       this.sortOrder = 'desc';
-    }
   }
 }
 
-function sort(key) {
+function sort(key){
   this.isSortingApply = true;
   this.sortType       = key || this.sortType;
   const url           = new URL(window.location);
   let sortBY          = 'updatedDate_dt';
 
-  if (this.sortType === 'name') {
+  if (this.sortType === 'name')
     sortBY = 'title_t';
-  }
-  if (this.sortType === 'created') {
+  
+  if (this.sortType === 'created')
     sortBY = 'createdDate_dt';
-  }
+  
 
   const sortParam = this.isAscending ? `${sortBY} asc` : `${sortBY} desc`;
+
   url.searchParams.set('sort', sortParam);
   window.history.pushState({}, '', url);
 
   setTimeout(() => this.$emit('$scbdFilterChange'), 600);
 }
 
-function removeSort() {
+function removeSort(){
   this.isSortingApply = false;
   removeFilter('sort');
   setTimeout(() => this.$emit('$scbdFilterChange'), 600);

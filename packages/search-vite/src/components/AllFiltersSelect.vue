@@ -22,7 +22,8 @@
     :hide-selected="true"
     ref="multiSelect"
   >
-    <template slot="beforeList">
+    <!-- <template slot="beforeList"> -->
+    <template v-slot:beforeList>
       <div v-if="latestSearchText">
         <button
           class="btn btn-outline-info my-3 mx-3"
@@ -37,14 +38,14 @@
       </div>
     </template>
 
-    <template slot="placeholder">
+    <template v-slot:placeholder>
       <Icon height="16" width="16" name="search" />
       {{ placeholder[0] }} {{ placeholder[1] }}
       <Icon height="16" width="16" name="filter" />
       {{ placeholder[2] }}
     </template>
 
-    <template slot="option" slot-scope="props">
+    <template v-slot:props>
       <div class="row" v-if="props.option.$groupLabel">
         <div class="col-12">
           <span class="filter-label">{{ props.option.$groupLabel }}</span>
