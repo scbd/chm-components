@@ -10,6 +10,11 @@
   "workspaces": {
     "packages": [
       "packages/*"
+    ],
+    "nohoist": [
+      "**/@scbd/dist-builder",
+      "**/@scbd/self-embedding-component"
+
     ]
   },
   "repository": "git+https://github.com/scbd/chm-components.git",
