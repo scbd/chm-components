@@ -102,11 +102,3 @@ dist
 
 # TernJS port file
 .tern-port
-packages/icons/dist_unminified/index.cjs.js
-packages/icons/dist_unminified/index.esm.js
-packages/icons/dist_unminified/index.umd.js
-packages/icons/dist_unminified/style.css
-packages/icons/dist_minified/index.cjs.min.js
-packages/icons/dist_minified/index.esm.min.js
-packages/icons/dist_minified/index.umd.min.js
-packages/icons/dist_minified/style.css
