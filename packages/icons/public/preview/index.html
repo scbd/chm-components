@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <link rel="stylesheet" href="http://localhost:5000/style.css">
+    <title>Preview</title>
+  </head>
+  <body>
+    <style >
+      
+      pre[class*=language-] {
+          padding: 1em;
+          margin: .5em 0;
+          overflow: auto;
+      }
+      
+      :not(pre)>code[class*=language-],pre[class*=language-] {
+          background: #2d2d2d;
+      }
+      
+      :not(pre)>code[class*=language-] {
+          padding: .1em;
+          border-radius: .3em;
+          white-space: normal
+      }
+      
+      .token.block-comment,.token.cdata,.token.comment,.token.doctype,.token.prolog {
+          color: #999
+      }
+      
+      .token.punctuation {
+          color: #ccc
+      }
+      
+      .token.attr-name,.token.deleted,.token.namespace,.token.tag {
+          color: #e2777a
+      }
+      
+      .token.attr-value,.token.char,.token.regex,.token.string,.token.variable {
+          color: #7ec699
+      }
+      
+      
+      </style>
+    <h1>HELLO</h1>
+    <script>
+      window.esmsInitOptions = { shimMode: true }
+    </script>
+    <script defer src="https://cdn.jsdelivr.net/npm/es-module-shims@1.4.4/dist/es-module-shims.js"></script>
+
+    <script type="importmap-shim" src="http://localhost:5000/preview/import-map.json"></script>
+  
+
+    <script type="module-shim" >
+      import { createApp  } from 'vue';
+      import { createI18n } from 'vue-i18n';
+      import   component    from '@chm/icons';
+
+
+      const i18n = createI18n ( false, { legacy: false, locale: 'en', messages: {} });
+
+      createApp(component).use(i18n).mount('#chm-icons');
+    </script>
+    <div id="chm-icons"></div>
+
+    <div id="app"></div>
+    <script type="module-shim" >
+      import { createApp  } from 'vue';
+      import { createI18n } from 'vue-i18n';
+      import SingleFileComponent from 'http://localhost:5000/preview/app.js';
+
+      const i18n = createI18n ( false, { legacy: false, locale: 'en', messages: {} });
+
+      createApp( SingleFileComponent ).use(i18n).mount('#app');
+
+
+    </script>
+  </body>
+</html>
