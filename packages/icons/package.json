@@ -45,7 +45,6 @@
     "vue-i18n": "9.2.0-beta.30"
   },
   "devDependencies": {
-    "@scbd/dist-builder": "0.0.2-beta",
-    "vite": "2.7.0"
+    "@scbd/dist-builder": "0.0.2-beta"
   }
 }
