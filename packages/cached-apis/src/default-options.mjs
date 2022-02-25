@@ -1,3 +1,4 @@
+import { setDefaultOptions, getDefaultOptionsFunction } from './config/index';
 import { name, version                                } from '../package.json'
 
 const libName     = name.replace('https://cdn.cbd.int/', '') // replace is a hack alack for browser build
@@ -27,19 +28,9 @@ const prod          = { ...stg }
 
 const environments  = { prod, stg, dev }
 
-const globalDefaultOptions = {}
-
 // #region options
 const validationMap = { expiry: Number, name: String, apisUrls: Object, dataSources: Array, version: String }
 // #endregion options
-
-const setDefaultOptions = ({ environments, validationMap, forceEnv, name }, nameSpace = name) => {
-  if(!nameSpace) throw new Error(' no name/nameSpace passed to setDefaultOptions')
-
-  globalDefaultOptions[nameSpace] = new DefaultOptions({ environments, validationMap, forceEnv, name })
-}
-
-const getDefaultOptionsFunction = (nameSpace) => (userOpts={}, forceEnv) => globalDefaultOptions[nameSpace].get(userOpts, forceEnv)
 
 setDefaultOptions({ environments, validationMap, name: libName }, libName)
 
