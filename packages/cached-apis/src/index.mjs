@@ -2,7 +2,6 @@ import   localForage   from 'localforage'
 import   isNil         from 'lodash.isnil'
 import   omitBy        from 'lodash.omitby'
 import { getUnLocale } from '@houlagins/locale'
-// import { get$http    } from '@houlagins/load-http'
 import { getLString }  from './data/i18n.mjs'
 import axios from "axios"
 
@@ -190,11 +189,6 @@ async function getFromApi(apiName, orderBy='name'){
               .map(sanitizers[apiName])
               .filter(truthy => truthy)
               .sort((a, b) => a[orderBy].localeCompare(b[orderBy]))
-
-    // const   data = (await (await axios.get(apisUrls[apiName], { timeout, retry })).json())
-    //   .map(sanitizers[apiName])
-    //   .filter(truthy => truthy)
-    //   .sort((a, b) => a[orderBy].localeCompare(b[orderBy]))
 
     localForage.setItem(`${apiName}-${locale}`, data)
     return data

@@ -23,10 +23,5 @@
     "vue-particles": "~1.0.9"
   },
   "devDependencies": {
-    "vue": "2.6.11",
-    "vue-i18n": "8.21.1",
-    "vue-server-renderer": "2.6.11",
-    "vue-template-compiler": "2.6.11"
-  },
-  "main": "index.js"
+  }
 }

@@ -9,10 +9,3 @@ export const getLString = (key) => {
 
   return lString
 }
-
-export const getTranslation = (key, lang) => {
-  const { messages } = locales
-  const   en         = (messages['en'] || {})[key] || key
-
-  return (messages[lang] || {})[key] || en
-}
