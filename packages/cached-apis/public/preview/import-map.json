@@ -2,6 +2,11 @@
   "imports": {
     "vue": "https://cdn.cbd.int/vue@3.2.30/dist/vue.esm-browser.prod.js",
     "vue-i18n": "https://cdn.cbd.int/vue-i18n@9.2.0-beta.30/dist/vue-i18n.esm-browser.prod.js",
-    "@chm/icons": "http://localhost:5000/dev/browser/index.js"
+    "@chm/cached-apis": "http://localhost:5000/dev/browser/index.js",
+    "@houlagins/locale" : "https://esm.sh/@houlagins/locale@1.0.0",
+    "localforage"       : "https://esm.sh/localforage@1.9.0",
+    "lodash.isnil"      : "https://esm.sh/lodash.isnil",
+    "lodash.omitby"     : "https://esm.sh/lodash.omitby",
+    "axios"             : "https://esm.sh/axios"
   }
 }

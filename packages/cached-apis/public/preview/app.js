@@ -1,19 +1,18 @@
 
 
-const template = '<div>{{all}}</div>'
+const template = `<div>{{all.length}}</div>`
 
-import * as CachedApis from '../../dist/browser/index.min.js'
-import   component    from '@chm/cached-apis';
+import   component, { getData }    from '@chm/cached-apis';
 export default {
   name      : 'App',
-  data,
   components: { component },
   template,
-  mounted
+  mounted,
+  data
 }
 
 async function mounted(){
-  this.all = await CachedApis.getAll()
+  this.all = await getData('all');
 }
 
 function data(){
