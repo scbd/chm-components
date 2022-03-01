@@ -4,7 +4,7 @@ import   IconComp     from './components/Icon.vue'
 const NAME =  'CHM-Icons'
 
 // #region snippet
-export const iconNames = [ 'search', 'filter' ]
+export const iconNames = [ 'search', 'filter', 'plus', 'list' ]
 // #endregion snippet
 
 export function install(Vue){
