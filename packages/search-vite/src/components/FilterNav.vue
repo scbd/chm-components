@@ -20,7 +20,7 @@
 </template>
 
 <script>
-import { getData, lookUp } from '@chm/cached-apis';
+import { getData, lookUp } from '@scbd-chm/cached-apis';
 import { getList          }          from '../api/index';
 import   AllFiltersSelect            from './AllFiltersSelect.vue';
 import   i18n                        from '../locales';

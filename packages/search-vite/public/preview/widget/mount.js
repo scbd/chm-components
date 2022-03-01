@@ -27,7 +27,7 @@ const __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
 * published: Fri Feb 18 2022 22:16:30 GMT+0530 (India Standard Time)
 */
 import Icons, { Icon } from '@scbd-chm/icons';
-import { initializeApiStore, lookUp, getData } from '@chm/cached-apis';
+import { initializeApiStore, lookUp, getData } from '@scbd-chm/cached-apis';
 import axios from 'axios';
 import { openBlock, createElementBlock, createElementVNode, toDisplayString, resolveComponent, createVNode, normalizeProps, guardReactiveProps, Fragment, renderList, createBlock, mergeProps, normalizeClass, withKeys, withModifiers, renderSlot, withDirectives, vShow, createCommentVNode, Transition, withCtx, normalizeStyle, createTextVNode, pushScopeId, popScopeId, vModelSelect, setBlockTracking } from 'vue';
 const i18n = {

@@ -1,4 +1,4 @@
-import { initializeApiStore } from '@chm/cached-apis';
+import { initializeApiStore } from '@scbd-chm/cached-apis';
 import { initializeOptions  } from './query/options';
 import { clearCache         } from './query/cache';
 

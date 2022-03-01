@@ -6,8 +6,5 @@
     "lodash.isnil"      : "https://esm.sh/lodash.isnil",
     "lodash.omitby"     : "https://esm.sh/lodash.omitby",
     "axios"             : "https://esm.sh/axios"
-
-
-
   }
 }

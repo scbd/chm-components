@@ -44,7 +44,7 @@
   },
   "readme": "ERROR: No README data found!",
   "dependencies": {
-    "@chm/cached-apis": "file:D:/zealous/scbd/chm-components_copy/packages/cached-apis",
+    "@scbd-chm/cached-apis": "0.0.1-alpha",
     "@scbd-chm/icons": "^0.0.1",
     "@scbd/self-embedding-component": "3.0.2",
     "axios": "0.26.0",

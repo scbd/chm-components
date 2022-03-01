@@ -33,7 +33,7 @@
 </template>
 
 <script>
-import { lookUp } from '@chm/cached-apis';
+import { lookUp } from '@scbd-chm/cached-apis';
 
 import HorzCardAction from './CardBody.vue';
 import i18n from '../../../locales/index';
