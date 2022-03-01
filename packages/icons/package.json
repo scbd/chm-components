@@ -1,13 +1,14 @@
 {
-  "name": "@chm/icons",
-  "version": "0.0.1",
+  "name": "@scbd-chm/icons",
+  "version": "0.0.2",
   "license": "MIT",
   "type": "module",
   "scripts": {
     "dev": "vite",
     "build": "dist-builder build",
-    "preview": "vite preview"
-  },"main": "dist/es/index.min.js",
+    "preview": "vite preview",
+    "clean-reinstall": "rm -f yarn.lock rm -f package-lock.json && rm -rf node_modules && CXXFLAGS=\"--std=c++17\" yarn install --force"
+  },"main": "dist/browser/index.min.js",
   "web": "dist/browser/index.min.js",
   "umd": "dist/umd/index.min.js",
   "unpkg": "dist/browser/index.min.js",
@@ -31,13 +32,13 @@
     ".": [
       {
         "import": "./dist/es/index.min.js",
-        "require": "./dist/cjs/index.cjs",
+        "require": "./dist/cjs/index.min.cjs",
         "style": "./dist/style.css",
         "src": "./src",
         "dist": "./dist",
         "default": "./dist/umd/index.min.js"
       },
-      "./dist/legacy/umd/index.umd.min.js"
+      "./dist/umd/index.min.js"
     ]
   },
   "dependencies": {
