@@ -7,6 +7,7 @@
     "dev": "vite",
     "build": "dist-builder build",
     "preview": "vite preview",
+    "release": "yarn publish --access=public --tag latest",
     "clean-reinstall": "rm -f yarn.lock rm -f package-lock.json && rm -rf node_modules && CXXFLAGS=\"--std=c++17\" yarn install --force"
   },"main": "dist/browser/index.min.js",
   "web": "dist/browser/index.min.js",
