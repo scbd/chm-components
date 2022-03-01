@@ -1,11 +1,3 @@
-// import { defineConfig } from 'vite'
-// import vue from '@vitejs/plugin-vue'
-
-// // https://vitejs.dev/config/
-// export default defineConfig({
-//   plugins: [ vue() ]
-// })
-
 import  DistBuilder from '@scbd/dist-builder'
 
 const { viteConfig, getPackageVersion, external } = DistBuilder
@@ -23,19 +15,20 @@ const modern  = { browser, ssr }
 
 const cdnUrl  = 'https://cdn.cbd.int'
 
-const css = [ 'https://cdn.cbd.int/@action-agenda/icons/dist/esm/index.min.css' ]
-
 const  imports = {
   vue                             : `${cdnUrl}/vue@${getPackageVersion('vue')}/dist/vue.esm-browser.prod.js`,
   'vue-i18n'                      : `${cdnUrl}/vue-i18n@${getPackageVersion('vue-i18n')}/dist/vue-i18n.esm-browser.prod.js`,
-  '@scbd/self-embedding-component': `${cdnUrl}/@scbd/self-embedding-component@${getPackageVersion('@scbd/self-embedding-component')}`
+  '@scbd/self-embedding-component': `${cdnUrl}/@scbd/self-embedding-component@${getPackageVersion('@scbd/self-embedding-component')}`,
+  'lodash.isnil'                  : `${cdnUrl}/lodash.isnil@4.0.0/index.js`,
+  'lodash.omitby'                 : `${cdnUrl}/lodash.omitby@4.6.0/index.js`,
+  axios                           : `${cdnUrl}/axios@0.26.0/dist/axios.min.js`
 }
 
 const widget     = true
 const testWidget = false
 
 export const distBuilderConfig = {
-  legacy, modern, widget, testWidget, cdnUrl, external, debug, minify, globals, imports, css
+  legacy, modern, widget, testWidget, cdnUrl, external, debug, minify, globals, imports
 }
 
 export default viteConfig(distBuilderConfig)

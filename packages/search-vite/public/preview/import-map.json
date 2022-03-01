@@ -3,9 +3,9 @@
     "vue": "https://cdn.cbd.int/vue@3.2.30/dist/vue.esm-browser.prod.js",
     "vue-i18n": "https://cdn.cbd.int/vue-i18n@9.2.0-beta.30/dist/vue-i18n.esm-browser.prod.js",
     "@chm/search": "http://localhost:5000/dev/browser/index.js",
-    "lodash.isnil":"https://cdn.cbd.int/lodash.isnil@4.0.0/index.js",
-    "lodash.omitby":"https://cdn.cbd.int/lodash.omitby@4.6.0/index.js",
-    "axios":"https://cdn.cbd.int/axios@0.26.0/dist/axios.min.js"
+    "lodash.isnil"      : "https://esm.sh/lodash.isnil",
+    "lodash.omitby"     : "https://esm.sh/lodash.omitby",
+    "axios"             : "https://esm.sh/axios"
 
 
 

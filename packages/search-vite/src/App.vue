@@ -14,6 +14,7 @@ export default {
 </script>
 
 <style>
+
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -22,7 +23,10 @@ export default {
   color: #2c3e50;
   margin-top: 60px;
 }
-@import url("https://cdn.cbd.int/@action-agenda/icons/dist/esm/index.min.css");
+
+  @import 'src/assets/css/vue-multiselect.css';
+
+/* @import url("https://cdn.cbd.int/@action-agenda/icons/dist/esm/index.min.css"); */
 
 #scbd-search {
   position: relative;
@@ -32,7 +36,6 @@ export default {
   position: absolute;
   bottom: 0;
   left: 50%;
-  /* background-color: burlywood; */
 }
 .stick {
   position: sticky;
@@ -43,4 +46,6 @@ export default {
 .navbar {
   padding: 0.5rem 1rem;
 }
+
+
 </style>

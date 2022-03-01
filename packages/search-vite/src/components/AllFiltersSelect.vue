@@ -79,9 +79,8 @@
 </template>
 
 <script>
-import { Icon }    from '@chm/icons';
+import { Icon } from '@scbd-chm/icons';
 import Multiselect from './multi-select/index';
-// import Icon from '../Icons/Icon.vue';
 
 export default {
   name      : 'SCBDSelect',

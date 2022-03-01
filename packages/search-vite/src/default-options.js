@@ -1,8 +1,6 @@
-// import { setDefaultOptions, getDefaultOptionsFunction } from '@houlagins/default-options/dist/legacy/cjs/index.common';
 import { setDefaultOptions, getDefaultOptionsFunction } from './config/index';
-// import { getUnLocale                                  } from '@houlagins/locale/dist/legacy/cjs/index.common';
 
-const name     = '@action-agenda/search';
+const name     = '@chm/search';
 const basePath = '/';
 const locale   = '';
 const smTop    = '0';

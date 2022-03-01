@@ -20,7 +20,7 @@
 
 <script>
 
-import Icons from '@chm/icons';
+import Icons from '@scbd-chm/icons';
 import i18n from '../locales/index';
 
 import { getList, initializeApi, updateOptions } from '../api/index';
@@ -91,7 +91,7 @@ function onScroll($el){
   updateOptions({ $el });
 
   return async () => {
-    if (process.server) return;
+    // if (process.server) return;
 
     const { pageYOffset }              = window;
     const {
@@ -212,7 +212,7 @@ function errorCaptured(err){
   color: #2c3e50;
   margin-top: 60px;
 }
-@import url("https://cdn.cbd.int/@action-agenda/icons/dist/esm/index.min.css");
+/* @import url("https://cdn.cbd.int/@action-agenda/icons/dist/esm/index.min.css"); */
 
 #scbd-search {
   position: relative;
