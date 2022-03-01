@@ -1,6 +1,6 @@
 
 
-import Icons, { Icon, iconNames } from '@chm/icons'
+import Icons, { Icon, iconNames } from '@scbd-chm/icons'
 
 
 const template = ` <div id="app">
