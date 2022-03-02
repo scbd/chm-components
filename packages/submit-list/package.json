@@ -1,6 +1,6 @@
 {
   "name": "@scbd-chm/submit-list",
-  "version": "0.0.1",
+  "version": "0.0.5-alpha",
   "license": "MIT",
   "type": "module",
   "scripts": {
@@ -8,7 +8,7 @@
     "build": "dist-builder build",
     "preview": "vite preview",
     "preview-widget": "export WIDGET_PREVIEW=true && vite preview",
-    "clean": "rm -f yarn.lock rm -f package-lock.json && rm -rf node_modules",
+    "release": "yarn publish --access=public --tag latest",
     "clean-reinstall": "rm -f yarn.lock rm -f package-lock.json && rm -rf node_modules && CXXFLAGS=\"--std=c++17\" yarn install --force"
   },
   "main": "dist/es/index.min.js",
@@ -42,11 +42,13 @@
         "default": "./dist/umd/index.min.js"
       },
       "./dist/cjs/index.min.cjs"
-    ]
+    ],
+    "./dist/": "./dist/",
+    "./src/": "./src/"
   },
   "dependencies": {
     "@scbd-chm/icons": "0.0.2",
-    "@scbd/self-embedding-component": "3.0.2",
+    "@scbd/self-embedding-component": "3.0.5",
     "vue": "3.2.31",
     "vue-i18n": "9.2.0-beta.30"
   },

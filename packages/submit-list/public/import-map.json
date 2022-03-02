@@ -2,6 +2,6 @@
   "imports": {
     "vue": "https://cdn.cbd.int/vue@3.2.30/dist/vue.esm-browser.prod.js",
     "vue-i18n": "https://cdn.cbd.int/vue-i18n@9.2.0-beta.30/dist/vue-i18n.esm-browser.prod.js",
-    "@scbd-chm/submit-list": "https://cdn.cbd.int/@scbd-chm/submit-list/browser/index.min.js"
+    "@scbd-chm/submit-list": "https://cdn.cbd.int/@scbd-chm/submit-list@0.0.3-alpha"
   }
 }

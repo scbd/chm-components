@@ -31,8 +31,9 @@
             data-toggle="tooltip"
             title=""
             data-original-title="Record List"
-            ><i class="fa fa-list"></i
-          ></a>
+            >
+            <Icon height="16" width="16" name="list" />
+            </a>
           <a
             translation-url=""
             class="btn btn-primary btn-sm"
@@ -40,8 +41,9 @@
             data-toggle="tooltip"
             title=""
             data-original-title="Add New Record"
-            ><i class="fa fa-plus-square"></i
-          ></a>
+            >
+            <Icon height="16" width="16" name="plus" />
+            </a>
         </div>
       </div>
     </div>
@@ -49,8 +51,11 @@
 </template>
 
 <script>
+import { Icon } from '@scbd-chm/icons';
+
 export default {
   name: "InnerRow",
+  components:  { Icon },
   props: {
     details: {
       type: Object,

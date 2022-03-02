@@ -6,4 +6,4 @@ const i18n = createI18n ( false, { legacy: false, locale: 'en', messages: {} });
 
 const { rootProps } = window?.chm?.ChmSubmitList || {}
 
-createApp(component, rootProps).use(i18n).mount('#mount-chm-submit-list');
+createApp(component, rootProps).use(i18n).mount('#mount-scbd-chm-submit-list');

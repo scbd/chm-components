@@ -1,5 +1,6 @@
 <template>
   <div  class="container">
+    <Icons v-once/>
     <div v-for="(row, index) of filterData" :key="index">
       <records :rows="row"></records>
     </div>
@@ -9,11 +10,10 @@
 <script>
 import data from "./data";
 import Records from "./Records.vue";
+import Icons from '@scbd-chm/icons'
 
 export default {
-  components: {
-    Records,
-  },
+  components: { Records, Icons },
   name: "SubmitList",
   data() {
     return {

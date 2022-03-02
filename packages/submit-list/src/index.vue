@@ -4,7 +4,7 @@
 
 <script>
 import './style.scss'
-import ChmComponent from './components/SubmitList.vue';
+import ChmComponent from './components/index.vue';
 
 export default {
   name      : 'App',
