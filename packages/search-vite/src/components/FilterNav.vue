@@ -35,7 +35,7 @@ export default {
   data,
   created,
   errorCaptured,
-  i18n,
+  // i18n,
   mounted
 };
 

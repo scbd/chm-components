@@ -1,5 +1,4 @@
 export default {
-  messages: {
     en: {
       showing                   : 'showing',
       to                        : 'to',
@@ -35,6 +34,5 @@ export default {
       capacityBuildingInitiative: 'Initiative',
       bbiRequest                : 'Request for Assistance',
       resource                  : 'Resource',
-    },
-  },
+    }
 };

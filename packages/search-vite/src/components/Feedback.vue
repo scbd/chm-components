@@ -81,7 +81,7 @@ export default {
     }
   },
   mounted,
-  i18n
+  // i18n
 };
 
 function mounted(){

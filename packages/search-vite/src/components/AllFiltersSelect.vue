@@ -80,8 +80,8 @@
 
 <script>
 import { Icon } from '@scbd-chm/icons';
-import Multiselect from './multi-select/index';
-
+import Multiselect from 'vue-multiselect';
+// import 'vue-multiselect/dist/dist/vue-multiselect.css';
 export default {
   name      : 'SCBDSelect',
   components: { Multiselect, Icon },
@@ -137,7 +137,7 @@ function highLight({ search, option }){
 }
 </script>
 
-<style scoped>
+<style >
 .fix {
   padding: 0 0 0 0;
   background-color: #ddd;

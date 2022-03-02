@@ -14,19 +14,7 @@ export default {
 </script>
 
 <style>
-
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  /* text-align: center; */
-  color: #2c3e50;
-  margin-top: 60px;
-}
-
-  @import 'src/assets/css/vue-multiselect.css';
-
-/* @import url("https://cdn.cbd.int/@action-agenda/icons/dist/esm/index.min.css"); */
+@import url("https://cdn.cbd.int/vue-multiselect@next/dist/dist/vue-multiselect.css"); 
 
 #scbd-search {
   position: relative;

@@ -30,8 +30,9 @@ import getDefaultOptions from '../default-options';
 import FilterNav from '../components/FilterNav.vue';
 import Feedback from '../components/Feedback.vue';
 
+
 export default {
-  name      : 'PortalAppSearch',
+  name      : 'ScbdChmSearch',
   components: {
     FilterNav, Feedback, List,
     Icons
@@ -51,7 +52,7 @@ export default {
   created,
   data,
   errorCaptured,
-  i18n
+  // i18n
 
 };
 
@@ -82,6 +83,7 @@ function data(){
   };
 }
 function opts(){
+  console.log(getDefaultOptions({}, 'production'))
   return { ...getDefaultOptions({}, this.forceEnv), ...this.options };
 }
 

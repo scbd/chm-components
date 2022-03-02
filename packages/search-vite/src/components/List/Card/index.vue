@@ -56,7 +56,7 @@ export default {
   data,
   created,
   updated,
-  i18n
+  // i18n
 };
 
 function data(){
