@@ -1,0 +1,55 @@
+{
+  "name": "@chm/nav-map",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "dist-builder build",
+    "preview": "vite preview"
+  },
+  "main": "dist/es/index.min.js",
+  "web": "dist/browser/index.min.js",
+  "umd": "dist/umd/index.min.js",
+  "unpkg": "dist/browser/index.min.js",
+  "jsdelivr": "dist/browser/index.min.js",
+  "module": "dist/es/index.min.js",
+  "jsnext:main": "dist/es/index.min.js",
+  "src": "src/index.js",
+  "files": [
+    "dist/*",
+    "src/*"
+  ],
+  "browser": {
+    "./cjs": "dist/cjs/index.min.cjs",
+    "./mjs": "dist/mjs/index.min.mjs",
+    "./umd": "dist/umd/index.min.js",
+    "./browser": "dist/browser/index.min.js",
+    "./style": "dist/browser/style.css",
+    "./": "dist/browser/index.min.js"
+  },
+  "exports": {
+    ".": [
+      {
+        "import": "./dist/es/index.min.js",
+        "require": "./dist/cjs/index.cjs",
+        "style": "./dist/style.css",
+        "src": "./src",
+        "dist": "./dist",
+        "default": "./dist/umd/index.min.js"
+      },
+      "./dist/legacy/umd/index.umd.min.js"
+    ]
+  },
+  "readme": "ERROR: No README data found!",
+  "dependencies": {
+    "@scbd/self-embedding-component": "3.0.2",
+    "@arcgis/core": "^4.22.2",
+    "vue": "^3.2.25"
+  },
+  "devDependencies": {
+    "@scbd/dist-builder": "0.0.2-beta",
+    "@vitejs/plugin-vue": "^2.2.0",
+    "vite": "^2.8.0"
+  }
+}
