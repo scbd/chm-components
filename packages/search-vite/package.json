@@ -1,0 +1,61 @@
+{
+  "name": "@chm/search",
+  "private": true,
+  "version": "0.0.1",
+  "license": "MIT",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "dist-builder build",
+    "preview": "vite preview",
+    "clean-reinstall": "rm -f yarn.lock rm -f package-lock.json && rm -rf node_modules && CXXFLAGS=\"--std=c++17\" yarn install --force"
+  },
+  "main": "dist/browser/index.min.js",
+  "web": "dist/browser/index.min.js",
+  "umd": "dist/umd/index.min.js",
+  "unpkg": "dist/browser/index.min.js",
+  "jsdelivr": "dist/browser/index.min.js",
+  "module": "dist/es/index.min.js",
+  "jsnext:main": "dist/es/index.min.js",
+  "src": "src/index.js",
+  "files": [
+    "dist/*",
+    "src/*"
+  ],
+  "browser": {
+    "./cjs": "dist/cjs/index.min.cjs",
+    "./mjs": "dist/mjs/index.min.mjs",
+    "./umd": "dist/umd/index.min.js",
+    "./browser": "dist/browser/index.min.js",
+    "./style": "dist/browser/style.css",
+    "./": "dist/browser/index.min.js"
+  },
+  "exports": {
+    ".": [
+      {
+        "import": "./dist/es/index.min.js",
+        "require": "./dist/cjs/index.min.cjs",
+        "style": "./dist/style.css",
+        "src": "./src",
+        "dist": "./dist",
+        "default": "./dist/umd/index.min.js"
+      },
+      "./dist/umd/index.min.js"
+    ]
+  },
+  "readme": "ERROR: No README data found!",
+  "dependencies": {
+    "@scbd-chm/cached-apis": "0.0.1-alpha",
+    "@scbd-chm/icons": "0.0.2",
+    "@scbd/self-embedding-component": "3.0.2",
+    "axios": "0.26.0",
+    "lodash.isnil": "4.0.0",
+    "lodash.omitby": "4.6.0",
+    "vue": "^3.2.31",
+    "vue-i18n": "9.2.0-beta.30",
+    "vue-multiselect": "3.0.0-alpha.2"
+  },
+  "devDependencies": {
+    "@scbd/dist-builder": "0.0.2-beta"
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "name": "chm-components",
+  "description": "chm-components",
+  "version": "1.0.0",
+  "license": "MIT",
+  "private": "true",
+  "readme": "https://github.com/scbd/chm-components",
+  "author": "Secretariat of the Convention on Biological Diversity <it@cbd.int>",
+  "homepage": "https://github.com/scbd/chm-components",
+
+  "scripts": {
+    "clean-reinstall": "if test -f yarn.lock; then rm yarn.lock; fi && if test -d node_modules; then rm -rf node_modules; fi  && yarn install --force "
+  },
+  "workspaces": {
+    "packages": [
+      "packages/*"
+    ],
+    "nohoist": [
+      "**/@scbd/dist-builder",
+      "**/@scbd/self-embedding-component",
+      "**/vue-multiselect"
+    ]
+  },
+  "repository": "git+https://github.com/scbd/chm-components.git",
+  "bugs": {
+    "url": "https://github.com/scbd/chm-components"
+  },
+  "dependencies": {
+    "vue-particles": "~1.0.9"
+  },
+  "main": "index.js"
+}
