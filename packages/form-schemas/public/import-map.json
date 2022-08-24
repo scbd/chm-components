@@ -1,0 +1,5 @@
+{
+  "imports": {
+    "yup": "https://esm.sh/yup@0.32.11"
+  }
+}

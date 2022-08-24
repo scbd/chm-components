@@ -19,8 +19,10 @@
       "**/@scbd/www-css",
       "**/@scbd-chm/cached-apis",
       "**/@scbd-chm/icons",
-      "**/vite",
-      "**/@vitejs/plugin-vue"
+      "**/vue",
+      "**/vue-i18n",
+      "**/@vitejs/plugin-vue",
+      "**/vue-upload-component"
     ]
   },
   "scripts": {

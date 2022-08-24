@@ -1,0 +1,55 @@
+{
+  "name": "@scbd-chm/form-schemas",
+  "version": "0.0.2-alpha",
+  "license": "MIT",
+  "type": "module",
+  "scripts": {
+    "build": "dist-builder build",
+    "release": "yarn publish --access=public --tag latest",
+    "clean-reinstall": "rm -f yarn.lock rm -f package-lock.json && rm -rf node_modules && CXXFLAGS=\"--std=c++17\" yarn install --force"
+  },
+  "main": "dist/es/index.min.js",
+  "web": "dist/browser/index.min.js",
+  "umd": "dist/umd/index.min.js",
+  "unpkg": "dist/browser/index.min.js",
+  "jsdelivr": "dist/browser/index.min.js",
+  "module": "dist/es/index.min.js",
+  "jsnext:main": "dist/es/index.min.js",
+  "src": "src/index.js",
+  "files": [
+    "dist/*",
+    "dist-dev/*",
+    "src/*"
+  ],
+  "browser": {
+    "./cjs": "dist/cjs/index.min.cjs",
+    "./mjs": "dist/mjs/index.min.mjs",
+    "./umd": "dist/umd/index.min.js",
+    "./browser": "dist/browser/index.min.js",
+    "./style": "dist/style.css",
+    "./": "dist/browser/index.min.js"
+  },
+  "exports": {
+    ".": [
+      {
+        "import": "./dist/es/index.min.js",
+        "require": "./dist/cjs-ex/index.min.cjs",
+        "style": "./dist/style.css",
+        "src": "./src",
+        "dist": "./dist",
+        "dist-dev": "./dist-dev",
+        "default": "./dist/es/index.min.js"
+      },
+      "./dist/cjs-ex/index.min.cjs"
+    ],
+    "./dist/": "./dist/",
+    "./src/": "./src/"
+  },
+  "dependencies": {
+    "yup": "0.32.11"
+  },
+  "devDependencies": {
+    "@scbd/dist-builder": "0.0.3-beta",
+    "consola": "2.15.3"
+  }
+}

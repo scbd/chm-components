@@ -1,0 +1,29 @@
+{
+  "imports": {
+    "@scbd-chm/form": "http://localhost:5000/browser/index.js",
+    "vue": "https://esm.sh/vue@^3.2.36",
+    "vue-upload-component": "https://esm.sh/vue-upload-component@3.1.2",
+    "vue-demi": "https://esm.sh/vue@^3.2.36",
+    "vue-i18n": "https://cdn.cbd.int/vue-i18n@9.2.0-beta.35/dist/vue-i18n.esm-browser.prod.js",
+    "vue-multiselect": "https://cdn.cbd.int/vue-multiselect@3.0.0-alpha.2/dist/vue-multiselect.esm.js",
+    "yup": "https://esm.sh/yup@0.32.11",
+    "vue-recaptcha": "https://cdn.cbd.int/vue-recaptcha@2.0.2/dist/vue-recaptcha.es.js",
+    "vue-advanced-cropper": "https://cdn.cbd.int/vue-advanced-cropper@2.8.1/dist/index.esm-browser.js",
+    "pinia": "https://esm.sh/pinia@2.0.13",
+    "luxon": "https://esm.sh/luxon@2.3.2",
+    "lodash.set": "https://esm.sh/lodash.set@4.3.2",
+    "lodash.isplainobject": "https://esm.sh/lodash.isplainobject@4.0.6",
+    "lodash.isnil": "https://esm.sh/lodash.isnil@4.0.0",
+    "lodash.isfunction": "https://esm.sh/lodash.isfunction@3.0.9",
+    "lodash.isempty": "https://esm.sh/lodash.isempty@4.4.0",
+    "lodash.intersection": "https://esm.sh/lodash.intersection@4.4.0",
+    "lodash.get": "https://esm.sh/lodash.get@4.4.2",
+    "lodash.clonedeep": "https://esm.sh/lodash.clonedeep@4.5.0",
+    "change-case": "https://esm.sh/change-case@4.1.2",
+    "axios": "https://esm.sh/axios@0.26.1",
+    "@scbd/self-embedding-component": "https://esm.sh/@scbd/self-embedding-component@3.0.8",
+    "@scbd-chm/icons": "https://cdn.cbd.int/@scbd-chm/icons@0.0.8/dist/browser/index.min.js",
+    "@scbd-chm/form-schemas": "https://esm.sh/@scbd-chm/form-schemas@0.0.1-alpha",
+    "@scbd-chm/cached-apis": "https://esm.sh/@scbd-chm/cached-apis@0.0.3-alpha"
+  }
+}

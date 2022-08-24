@@ -1,0 +1,82 @@
+{
+  "name": "@scbd-chm/form",
+  "version": "0.0.1-alpha",
+  "license": "MIT",
+  "type": "module",
+  "scripts": {
+    "dev": "vite --open",
+    "build": "dist-builder build",
+    "preview": "export PREVIEW=true && vite preview --host",
+    "preview-widget": "export WIDGET_PREVIEW=true && vite preview",
+    "release": "yarn publish --access=public --tag latest",
+    "clean-reinstall": "rm -f yarn.lock rm -f package-lock.json && rm -rf node_modules && CXXFLAGS=\"--std=c++17\" yarn install --force"
+  },
+  "main": "dist/es/index.min.js",
+  "web": "dist/browser/index.min.js",
+  "umd": "dist/umd/index.min.js",
+  "unpkg": "dist/browser/index.min.js",
+  "jsdelivr": "dist/browser/index.min.js",
+  "module": "dist/es/index.min.js",
+  "jsnext:main": "dist/es/index.min.js",
+  "src": "src/index.js",
+  "files": [
+    "dist/*",
+    "src/*"
+  ],
+  "browser": {
+    "./cjs": "dist/cjs/index.min.cjs",
+    "./mjs": "dist/mjs/index.min.mjs",
+    "./umd": "dist/umd/index.min.js",
+    "./browser": "dist/browser/index.min.js",
+    "./style": "dist/style.css",
+    "./": "dist/browser/index.min.js"
+  },
+  "exports": {
+    ".": [
+      {
+        "import": "./dist/es/index.min.js",
+        "require": "./dist/cjs/index.min.cjs",
+        "style": "./dist/style.css",
+        "src": "./src",
+        "dist": "./dist",
+        "default": "./dist/umd/index.min.js"
+      },
+      "./dist/cjs/index.min.cjs"
+    ],
+    "./dist/": "./dist/",
+    "./src/": "./src/"
+  },
+  "dependencies": {
+    "@scbd-chm/cached-apis": "0.0.3-alpha",
+    "@scbd-chm/form-schemas": "0.0.1-alpha",
+    "@scbd-chm/icons": "0.0.8",
+    "@scbd/self-embedding-component": "3.0.8",
+    "@scbd/www-css": "1.0.2",
+    "axios": "0.27.2",
+    "change-case": "4.1.2",
+    "es-module-shims": "1.5.5",
+    "lodash.clonedeep": "4.5.0",
+    "lodash.get": "4.4.2",
+    "lodash.intersection": "4.4.0",
+    "lodash.isempty": "4.4.0",
+    "lodash.isfunction": "3.0.9",
+    "lodash.isnil": "4.0.0",
+    "lodash.isplainobject": "4.0.6",
+    "lodash.set": "4.3.2",
+    "luxon": "2.4.0",
+    "pinia": "2.0.14",
+    "vee-validate": "4.5.11",
+    "vue": "^3.2.36",
+    "vue-advanced-cropper": "2.8.1",
+    "vue-i18n": "9.2.0-beta.35",
+    "vue-multiselect": "3.0.0-alpha.2",
+    "vue-recaptcha": "2.0.2",
+    "vue-upload-component": "3.1.2",
+    "yup": "0.32.11"
+  },
+  "devDependencies": {
+    "@scbd/dist-builder": "0.0.3-beta",
+    "consola": "2.15.3",
+    "sass": "1.32.11"
+  }
+}
