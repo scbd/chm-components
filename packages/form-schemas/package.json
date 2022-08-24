@@ -49,7 +49,7 @@
     "yup": "0.32.11"
   },
   "devDependencies": {
-    "@scbd/dist-builder": "0.0.3-beta",
+    "@scbd/dist-builder": "github:randyhoulahan/dist-builder#save-vue-3",
     "consola": "2.15.3"
   }
 }
