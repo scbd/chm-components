@@ -1,20 +1,18 @@
 <template>
-  <ChmComponent :options="options" :schema-name="schemaName" id="chm-form"/>
+  <ChmComponent :options="options" :schema-name="schemaName" id="chm-form" />
 </template>
 
 <script>
-import './style.scss'
+import "./style.scss";
 
-import ChmComponent from './components/index.vue';
+import ChmComponent from "./components/index.vue";
 
 export default {
-  name      : 'App',
-  props     : {
+  name: "App",
+  props: {
     schemaName: { type: String, required: true },
-    options   : { type: Object }
+    options: { type: Object },
   },
-  components: { ChmComponent }
+  components: { ChmComponent },
 };
 </script>
-
-

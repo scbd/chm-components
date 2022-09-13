@@ -10,6 +10,8 @@ export default {
   debug      : false,
   rows: [
     {  columns: [ { name: 'creator.@type',                       is: 'TextInput',   options: { type: 'hidden',    rules: { required: true } },  value: 'Person'  }  ]},
+    {  columns: [ { name: 'creator.@type',                       is: 'TextInput',   options: { type: 'hidden',    rules: { required: true } },  value: 'Person'  }  ]},
+
     {  columns: [ { name: 'creator.email',              is: 'TextInput',   options: { type: 'email', rules: { format: 'email', required: true } } }  ] },
     {  columns: [ { name: 'creator.name',               is: 'LString',     options: { rules: { required: true, max: 100 } } } ] },
     {  columns: [ { name: 'creator.worksFor.name',      is: 'LString',     options: { rules: { max: 100 } } } ] },
