@@ -1,7 +1,7 @@
 export default {
     'id'                                     : 'Action ID',
     'actor.name'                             : 'Name of Organization',
-    'actor.name.placeholder'                 : 'Your Organizations\'s Name',
+    'actor.name.placeholder'                 : 'Your Organizations\'s Namee',
     'actor.website'                          : 'Website',
     'actor.website.placeholder'              : 'Enter website',
     'actor.logo'                             : 'Organization Logo',
@@ -35,9 +35,6 @@ export default {
     'partners'                               : 'Partners',
     'contacts'                               : 'Contacts',
 
-
-    'creator.email'                          : 'E-mail',
-    'creator.email.placeholder'              : 'Your email address',
-    'creator.name'                           : 'Full name',
-    'creator.name.placeholder'               : 'Your name',
+    'creator.@type'                        : ' ',
+    'creator.@type.placeholder'            : ' ',
   }

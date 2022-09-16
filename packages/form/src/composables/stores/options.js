@@ -31,6 +31,9 @@ async function loadSchema(identifier, options = {}){
   
   // const schema     = { ...(await useSchema2('aa-action')), ...options.value}
   // const t = useSchema2('aa-action')
+  // console.log("Options: ",options.value)
+  // console.log("Options2: ",)
+  // console.log(options.multiple)
   // console.log('testing...',t)
 
   this.$patch({ ...schema })

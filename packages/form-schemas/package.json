@@ -46,10 +46,10 @@
     "./src/": "./src/"
   },
   "dependencies": {
+    "@scbd/dist-builder": "github:randyhoulahan/dist-builder#save-vue-3",
     "yup": "0.32.11"
   },
   "devDependencies": {
-    "@scbd/dist-builder": "github:randyhoulahan/dist-builder#save-vue-3",
     "consola": "2.15.3"
   }
 }
