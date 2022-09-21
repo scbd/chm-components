@@ -6,7 +6,7 @@ import App, { i18n        } from './index'
 //'idb-message'
 // const anApp = createApp(App, { schemaName: 'idb-action', options: {debug: true, apiUrl: 'http://localhost:8000/api/v2022/events'}})
 
-const anApp = createApp(App, {schemaName: 'aa-action', options: {debug: true, apiUrl: 'http://localhost:8000/api/v2019/actions'}} )
+const anApp = createApp(App, {schemaName: 'aa-action', options: {debug: true, apiUrl: ' https://api.cbd.int/api/v2019/actions'}} )
 
 anApp.use(createI18n(i18n))
 anApp.use(createPinia())

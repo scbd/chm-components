@@ -5,7 +5,7 @@ export const idbMessage = import('./schemas/idb-message/idb-message.js')
 export const aaAction = import ('./schemas/aa-action/aa-action.js') 
 
 export default async (schemaName) => {
-  console.log("TESTING: In FORM_SCHEMAS currently") //testing..
+  // console.log("TESTING: In FORM_SCHEMAS currently") //testing..
   const schemaNames = ['idb-action', 'idb-message', 'aa-action']  //added aa-action
 
   if(!schemaNames.includes(schemaName)) return undefined

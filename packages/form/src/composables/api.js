@@ -79,6 +79,7 @@ export const postDocument = async (document) => {
   }
   catch (e){ 
     const { apiUrl }  = await getOptions()
+    console.log("API URL:",apiUrl)
 
     if(e.message==='Network Error')
       addError({ name: 'Network Error', message:`There appears to be a network connection error between your computer and the end point`, identifier:apiUrl})
