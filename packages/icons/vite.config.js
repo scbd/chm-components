@@ -13,7 +13,7 @@ const browser = true
 const ssr     = true
 const modern  = { browser, ssr }
 
-const cdnUrl  = 'https://cdn.cbd.int'
+const cdnUrl  = 'https://cdn.jsdelivr.net/npm'
 
 const  imports = {
   'vue'               : `${cdnUrl}/vue@${getPackageVersion('vue')}/dist/vue.esm-browser.prod.js`,
